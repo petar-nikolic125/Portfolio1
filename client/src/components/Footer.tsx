@@ -3,12 +3,12 @@ import { SiGithub, SiLinkedin, SiInstagram } from "react-icons/si";
 
 export default function Footer() {
   return (
-    <footer className="py-16 px-4 sm:px-6 lg:px-8 border-t border-gray-800">
+    <footer className="py-16 px-4 sm:px-6 lg:px-8 border-t border-border">
       <div className="max-w-4xl mx-auto text-center">
         {/* Personal Monogram */}
         <div className="mb-6">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-800 rounded-full border border-gray-700 shadow-inner">
-            <span className="font-serif font-bold text-xl text-gray-100">PN</span>
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-muted rounded-full border border-border shadow-inner">
+            <span className="font-serif font-bold text-xl text-foreground">PN</span>
           </div>
         </div>
         
@@ -16,14 +16,14 @@ export default function Footer() {
         <div className="flex justify-center space-x-6 mb-6">
           <a 
             href={personalInfo.social.github} 
-            className="text-gray-500 hover:text-navy hover:-translate-y-0.5 transition-all duration-300"
+            className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition-all duration-300"
             aria-label="GitHub"
           >
             <SiGithub className="w-5 h-5" />
           </a>
           <a 
             href={personalInfo.social.linkedin} 
-            className="text-gray-500 hover:text-navy hover:-translate-y-0.5 transition-all duration-300"
+            className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition-all duration-300"
             aria-label="LinkedIn"
           >
             <SiLinkedin className="w-5 h-5" />

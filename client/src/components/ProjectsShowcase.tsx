@@ -10,7 +10,7 @@ export default function ProjectsShowcase() {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <h2 className="font-serif font-bold text-4xl text-gray-100 text-center mb-16">Projects</h2>
+        <h2 className="font-serif font-bold text-4xl text-foreground text-center mb-16">Projects</h2>
         
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {featuredProjects.map((project) => (
@@ -21,15 +21,15 @@ export default function ProjectsShowcase() {
         {/* Interactive 3D More Projects Tile */}
         <div className="text-center">
           <Link href="/projects" className="group relative inline-block">
-            <div className="relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 transition-all duration-500 hover:shadow-2xl hover:shadow-navy/20 hover:-translate-y-2 hover:rotate-1 transform-gpu">
+            <div className="relative bg-gradient-to-br from-muted to-card border border-border rounded-lg p-6 transition-all duration-500 hover:shadow-2xl hover:shadow-black/20 hover:-translate-y-2 hover:rotate-1 transform-gpu">
               {/* 3D Effect Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-navy/10 to-purple-500/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-primary/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               <div className="relative z-10 flex items-center justify-center space-x-3">
-                <span className="text-gray-300 group-hover:text-gray-100 transition-colors duration-300 font-medium">
+                <span className="text-muted-foreground group-hover:text-foreground transition-colors duration-300 font-medium">
                   More projects
                 </span>
-                <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-navy group-hover:translate-x-1 transition-all duration-300" />
+                <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 transition-all duration-300" />
               </div>
               
               {/* Subtle animation particles */}

@@ -54,12 +54,12 @@ export default function HeroEnhanced() {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center px-4 md:px-8 lg:px-16 overflow-hidden"
     >
-      {/* Parallax background layers */}
+      {/* Subtle neutral grain background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="parallax-layer-1 absolute inset-0 bg-gradient-to-br from-indigo-900/10 via-transparent to-purple-900/10" />
+        <div className="parallax-layer-1 absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-muted/5" />
         <div className="parallax-layer-2 absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-500/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/3 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/3 rounded-full blur-3xl" />
         </div>
       </div>
       
@@ -68,14 +68,14 @@ export default function HeroEnhanced() {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}>
         {/* Greeting with animation */}
-        <p className="text-indigo-400 text-lg mb-4 animate-fade-slide-in">
+        <p className="text-muted-foreground text-lg mb-4 animate-fade-slide-in">
           Hello, I'm
         </p>
         
         {/* Name with gradient and glow effect */}
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 relative">
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 relative">
           <span className="relative inline-block">
-            <span className="text-white animate-text-stroke-glow">
+            <span className="text-foreground animate-text-stroke-glow">
               {personalInfo.name}
             </span>
             {/* Animated underline */}
@@ -84,12 +84,12 @@ export default function HeroEnhanced() {
         </h1>
         
         {/* Title with typing effect */}
-        <h2 className="text-2xl md:text-3xl text-gray-300 mb-8 animate-slide-up-fade stagger-1">
+        <h2 className="text-2xl md:text-3xl text-muted-foreground mb-8 animate-slide-up-fade stagger-1">
           {personalInfo.title}
         </h2>
         
         {/* Subtitle */}
-        <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto animate-slide-up-fade stagger-2">
+        <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto animate-slide-up-fade stagger-2">
           {personalInfo.subtitle}
         </p>
         
@@ -97,21 +97,21 @@ export default function HeroEnhanced() {
         <div className="flex flex-wrap justify-center gap-4 mb-8 animate-pop-in stagger-3">
           <a
             href={`mailto:${personalInfo.social.email}`}
-            className="group relative px-8 py-3 bg-indigo-600 text-white rounded-lg font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25"
+            className="group relative px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-black/25"
           >
             <span className="relative z-10 flex items-center gap-2">
               <Mail size={20} />
               Get in Touch
             </span>
             {/* Hover effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            <div className="absolute inset-0 bg-accent transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
           </a>
           
           <a
             href={personalInfo.social.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3 border border-gray-600 text-gray-300 rounded-lg font-medium transition-all duration-300 hover:border-indigo-500 hover:text-white hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/10"
+            className="px-8 py-3 border border-border text-muted-foreground rounded-lg font-medium transition-all duration-300 hover:border-accent hover:text-accent hover:scale-105 hover:shadow-lg hover:shadow-black/10"
           >
             <span className="flex items-center gap-2">
               <Github size={20} />

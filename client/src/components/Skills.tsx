@@ -26,12 +26,12 @@ export default function Skills() {
   return (
     <section ref={sectionRef} className="section-padding px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <h2 className="font-serif font-bold text-4xl text-gray-100 text-center mb-16 animate-mask-reveal">Skills</h2>
+        <h2 className="font-serif font-bold text-4xl text-foreground text-center mb-16 animate-mask-reveal">Skills</h2>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {Object.entries(skillsByCategory).map(([category, skills], categoryIdx) => (
             <div key={category} className="text-center">
-              <h3 className="font-sans font-semibold text-lg text-gray-200 mb-4 tracking-wide">
+              <h3 className="font-sans font-semibold text-lg text-foreground mb-4 tracking-wide">
                 {category}
               </h3>
               <div className="flex flex-wrap justify-center gap-2">
