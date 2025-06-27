@@ -1,0 +1,60 @@
+### Flagship 3-D scene — **“Pixel-Component Craft Factory”**
+
+*(full storyboard + interaction spec)*
+
+---
+
+| Phase                              | Visuals                                                                                  | Motion & Interaction                                                                                 | Audio / FX                        | Perf. notes                                           |
+| ---------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------- |
+| **0 – Pre-load**                   | Static blurred poster frame (factory silhouette)                                         | Progress bar bottom-center                                                                           | None                              | Poster frame served <100 KB; animation JS lazy-loaded |
+| **1 – Reveal (0-3 s)**             | Curtain-fade to a dim, single-point-lit factory bay; conveyor belts idle                 | Camera dolly-in 5 m → 3 m, slight yaw; shallow DOF                                                   | Sub-1 sec servo hum ramp          | GPU only kicks in after load complete                 |
+| **2 – Component rain (3-10 s)**    | UI elements (buttons, cards, sliders) spawn above conveyor, drift like holographic tiles | Soft Z-axis fall; subtle random spin; physics collider on belts                                      | Synth “ping” when each part lands | Physics limited to 20 dynamic bodies for mobile       |
+| **3 – Robotic arms (10-20 s)**     | Two six-axis arms slide from side rails                                                  | FK/IK rig animates pick-and-place: arms grab tiles, rotate 90°, press onto central **assembly cube** | Pneumatic hiss, click             | Arm meshes baked to 5 K tris each                     |
+| **4 – Logo morph (20-30 s)**       | Assembly cube rotates mid-air; faces light up sequentially                               | Cube shifts vertices via morph targets → transforms into **Petar Nikolić** monogram                  | Soft swell sound + subtle bloom   | Morph target computed once, reused                    |
+| **5 – User control (30 s onward)** | Scene stabilizes; UI hint “drag to orbit • scroll/pinch to zoom” fades in                | Orbit controls unlocked, damping 0.1; mobile tilt rotates ±10°                                       | Ambient loop only                 | On mobile: particle count halves, shadows drop        |
+| **6 – CTA trigger**                | Floating translucent button “Explore Live Demo →” hovers near logo                       | On hover/tap, button pulses; click opens **pixel-component-craft.vercel.app** in new tab             | UI “tap” click                    | Button billboarded toward camera                      |
+
+---
+
+#### Lighting & materials
+
+* **Key light**: area light overhead, cool tint, 60 % intensity.
+* **Fill lights**: two rim lights at ±120°, low intensity, warm tint to accentuate edges.
+* **Materials**:
+
+  * Conveyor & arms: matte metal with slight roughness variance.
+  * UI tiles: emissive surface on front face, glassy rim.
+  * Logo morph cube: PBR plastic with programmable emission for face-by-face light-up.
+
+#### Camera & controls
+
+* **Initial path**: GSAP timeline—dolly-in, lateral sway, overshoot + settle.
+* **User mode**: Three.js `OrbitControls` (desktop) / custom gyro (mobile).
+* Frustum-culled particle emitters to minimise overdraw.
+
+#### Responsiveness & fallbacks
+
+* Device check on first render:
+
+  * ≥8 GB RAM & WebGL2 → full scene, 60 fps.
+  * 4-8 GB → reduced shadow maps, lower poly conveyor.
+  * <4 GB or WebGL1 → static poster with video loop fallback (compressed 720p H264).
+* `prefers-reduced-motion`: skip camera dolly, disable particle rain, auto-show CTA.
+
+#### Accessibility tags
+
+* `<canvas aria-hidden="true">` with adjacent `<figcaption>`:
+  *“Animated factory assembling UI components into Petar Nikolić monogram. Press ‘Skip Animation’ to continue.”*
+* `Escape` key or on-screen “Skip” instantly jumps to final logo state.
+
+#### File budget
+
+| Asset            | Desktop       | Mobile     |
+| ---------------- | ------------- | ---------- |
+| Geometry (glb)   | ≤ 1.2 MB      | ≤ 600 KB   |
+| Textures         | 512 px max    | 256 px max |
+| JS bundle (lazy) | ≤ 150 KB gzip | same       |
+
+---
+
+**Outcome:** a single hero-level 3-D experience that **proves mastery** of real-time graphics, interaction design, and performance engineering—while funnelling visitors straight to your live demo via an irresistible CTA.

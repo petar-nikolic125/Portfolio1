@@ -15,12 +15,20 @@ interface ProjectCardProps {
     docsUrl?: string;
     type: string;
     category?: string;
+    featured?: boolean;
   };
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card className="group bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-900/30 transition-all duration-300">
+    <Card className="group bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-900/30 transition-all duration-300 relative">
+      {project.featured && (
+        <div className="absolute top-4 right-4 z-10">
+          <Badge className="bg-blue-600 text-white px-3 py-1 text-xs font-semibold shadow-lg">
+            Featured Project
+          </Badge>
+        </div>
+      )}
       <img 
         src={project.image} 
         alt={project.name}
