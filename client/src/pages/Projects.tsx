@@ -1,8 +1,8 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Search, ExternalLink } from "lucide-react";
+import { ArrowLeft, Search, ExternalLink, FileText } from "lucide-react";
 import { SiGithub } from "react-icons/si";
-import { projects, technologies, availabilityOptions, typeOptions } from "@/data/portfolio";
+import { projects, technologies, availabilityOptions, typeOptions, categoryOptions } from "@/data/portfolio";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ interface Filters {
   technology: string[];
   availability: string[];
   type: string[];
+  category: string[];
 }
 
 export default function Projects() {
@@ -20,12 +21,14 @@ export default function Projects() {
   const [filters, setFilters] = useState<Filters>({
     technology: [],
     availability: [],
-    type: []
+    type: [],
+    category: []
   });
   const [expandedFilters, setExpandedFilters] = useState({
     technology: true,
     availability: false,
-    type: false
+    type: false,
+    category: false
   });
 
   const filteredProjects = useMemo(() => {
@@ -41,8 +44,11 @@ export default function Projects() {
       
       const matchesType = filters.type.length === 0 ||
                          filters.type.includes(project.type);
+      
+      const matchesCategory = filters.category.length === 0 ||
+                             (project.category && filters.category.includes(project.category));
 
-      return matchesSearch && matchesTechnology && matchesAvailability && matchesType;
+      return matchesSearch && matchesTechnology && matchesAvailability && matchesType && matchesCategory;
     });
   }, [searchTerm, filters]);
 
@@ -59,7 +65,8 @@ export default function Projects() {
     setFilters({
       technology: [],
       availability: [],
-      type: []
+      type: [],
+      category: []
     });
     setSearchTerm("");
   };
@@ -71,7 +78,7 @@ export default function Projects() {
     }));
   };
 
-  const hasActiveFilters = filters.technology.length > 0 || filters.availability.length > 0 || filters.type.length > 0 || searchTerm.length > 0;
+  const hasActiveFilters = filters.technology.length > 0 || filters.availability.length > 0 || filters.type.length > 0 || filters.category.length > 0 || searchTerm.length > 0;
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
@@ -215,6 +222,42 @@ export default function Projects() {
                     )}
                   </div>
 
+                  {/* Category Filter */}
+                  <div className="mb-6">
+                    <Button
+                      variant="ghost"
+                      onClick={() => toggleFilterExpansion('category')}
+                      className="flex items-center justify-between w-full text-left text-gray-100 font-medium mb-3 p-0 h-auto hover:bg-transparent"
+                    >
+                      <span>Category</span>
+                      <span className={`transform transition-transform ${expandedFilters.category ? 'rotate-180' : ''}`}>
+                        ▼
+                      </span>
+                    </Button>
+                    {expandedFilters.category && (
+                      <div className="space-y-2 text-sm">
+                        {categoryOptions.map(option => (
+                          <div key={option} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`category-${option}`}
+                              checked={filters.category.includes(option)}
+                              onCheckedChange={(checked) => 
+                                handleFilterChange('category', option, checked as boolean)
+                              }
+                              className="border-gray-600 data-[state=checked]:bg-navy data-[state=checked]:border-navy"
+                            />
+                            <label
+                              htmlFor={`category-${option}`}
+                              className="text-gray-300 hover:text-gray-100 cursor-pointer flex-1"
+                            >
+                              {option}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                   {/* Clear Filters */}
                   <Button
                     onClick={clearAllFilters}
@@ -241,6 +284,9 @@ export default function Projects() {
                           Technologies
                         </th>
                         <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                          Category
+                        </th>
+                        <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                           Links
                         </th>
                       </tr>
@@ -248,7 +294,7 @@ export default function Projects() {
                     <tbody className="divide-y divide-gray-800">
                       {filteredProjects.length === 0 ? (
                         <tr>
-                          <td colSpan={3} className="px-6 py-8 text-center text-gray-400">
+                          <td colSpan={4} className="px-6 py-8 text-center text-gray-400">
                             No projects found matching your criteria.
                           </td>
                         </tr>
@@ -278,6 +324,16 @@ export default function Projects() {
                                 ))}
                               </div>
                             </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              {project.category && (
+                                <Badge
+                                  variant="outline"
+                                  className="px-2 py-1 text-xs border-gray-600 text-gray-300"
+                                >
+                                  {project.category}
+                                </Badge>
+                              )}
+                            </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm">
                               <div className="flex space-x-3">
                                 {project.liveUrl && (
@@ -296,6 +352,15 @@ export default function Projects() {
                                     title="Source Code"
                                   >
                                     <SiGithub className="w-4 h-4" />
+                                  </a>
+                                )}
+                                {project.docsUrl && (
+                                  <a
+                                    href={project.docsUrl}
+                                    className="text-gray-400 hover:text-gray-100 transition-colors"
+                                    title="Documentation"
+                                  >
+                                    <FileText className="w-4 h-4" />
                                   </a>
                                 )}
                               </div>

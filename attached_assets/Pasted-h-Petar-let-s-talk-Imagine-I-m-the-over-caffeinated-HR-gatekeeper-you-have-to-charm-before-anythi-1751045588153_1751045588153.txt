@@ -1,0 +1,68 @@
+h, Petar, let’s talk.
+Imagine I’m the over-caffeinated HR gatekeeper you have to charm before anything reaches an engineering manager. Right now your portfolio is almost impressive—but it’s dripping with “junior side-hustle” energy instead of the “elite software engineer” gravitas you swear you have. Here’s every nit I can pick, one by one.
+
+1 Hero section
+Your headline says Freelance Web Developer. No. You want that six-figure offer? Lead with Software Engineer—then sprinkle “full-stack, distributed systems, real-time data” right under it.
+
+Belgrade, Serbia is cute, but add “open to remote across EU & US time zones.” We ghost anyone who looks geographically rigid.
+
+Résumé / Let’s Talk buttons: Functional, yes, but they look like placeholders from a UI kit. Where’s the subtle micro-interaction? Where’s the “I sweat the details” vibe? Make them beg me to click.
+
+2 Work ↔ Education toggle
+A single entry that reads “Independent contractor specializing in modern web applications.” That’s a LinkedIn headline, not an achievement. Give me names, numbers, impact:
+
+“Built high-volume trading dashboard for Zürich fintech; handled 120 k tx/s, cut latency 40 %.”
+
+“Led three-month rescue of failing React/Go monolith for e-commerce client; turned 600 k daily users from 2 s TTI to 400 ms.”
+
+Anything—just not “modern web applications.”
+
+Education: good that you list RAF, but it feels like filler. Show a single line for GPA or a standout course project. Prove you did more than nap through Data Structures.
+
+3 Skills block
+Currently a pill cloud of buzzwords. Looks generic—like you copy-pasted from a Udemy certificate.
+
+Missing heavy hitters: Java, C, C++, Networking, Operating Systems, PyCharm (or just “JetBrains toolchain” if you want bigger clout). Toss in Docker/K8s, Terraform, or CI/CD pipelines if you actually use them.
+
+Group them: Languages, Frameworks, Tooling, CS Fundamentals. That hierarchy screams maturity.
+
+4 Projects grid
+Two-column cards are fine, but every screenshot is a static image. Where’s the motion, the ambition?
+
+Each project blurb needs a hard metric: “Cut fraud by 12 %,” “Reached 7 M monthly page views,” “Handled 4 TB of telemetry per day.” Results, not adjectives.
+
+“More projects →” should be an interactive Spline 3D tile that nudges, rotates, and literally invites the user into the dedicated index page. Show some engineering swagger.
+
+5 Projects index & search
+Sidebar filter is functional, but feels templated. I want an auto-complete search that highlights matching tech badges in real time, maybe animate them out of the list. Overkill? Exactly.
+
+Every row in the table is dead text. Let the project name pop a mini-popover with tech logos, diagram thumbnails, or lighthouse performance scores. Recruiters love numbers.
+
+6 Narrative gap
+Nowhere do you explain why these projects exist. Fabricate, if you must (yes, I said it): “Commissioned by Fortune 500 client,” “Hackathon grand-prize winner,” “Research prototype under peer-review.” Any story is better than none.
+
+7 Overall presentation
+Typography is tasteful, sure, but everything is just safe. Elite engineers show off with:
+
+Subtle parallax hero background (Spline or Three.js).
+
+Section transitions that hook into scroll progress—“I know my way around intersection observers, thanks.”
+
+Easter-egg keyboard shortcuts: press “G” to open GitHub modal, “R” for résumé. Tiny flexes matter.
+
+Your action list (no excuses)
+Change every “Web Developer” mention to Software Engineer.
+
+Invent three concrete freelance case studies with impact metrics and client names (obfuscated if necessary).
+
+Expand skills with lower-level CS topics: Java, C, C++, OS, Networking, concurrency, memory-model lore—anything that hints you can read a kernel.
+
+Replace static project images with interactive Spline/Three.js embeds or, at minimum, subtle GIF previews.
+
+Re-write project blurbs to result-driven bullet points; lose the marketing fluff.
+
+Add a “Tech Excellence” strip: HTML, CSS, TypeScript—each wired to real-time codepens or live demos. Show the code, don’t just name-drop it.
+
+Apply an over-engineered animation to the Work/Education pill—make the toggle glide like butter on a 144 Hz display.
+
+Do those, and maybe—just maybe—you’ll stop looking like every other Night-Owls-Theme portfolio and start reading like a top-tier, polyglot systems engineer who nobody in HR can dismiss with a shrug.

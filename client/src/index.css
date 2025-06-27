@@ -77,6 +77,14 @@
     animation: fadeIn 0.25s cubic-bezier(0.16, 0.84, 0.44, 1);
   }
 
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
   @keyframes fadeUp {
     0% {
       opacity: 0;
@@ -95,6 +103,32 @@
     100% {
       opacity: 1;
     }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px rgba(12, 26, 37, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 20px rgba(12, 26, 37, 0.6), 0 0 30px rgba(12, 26, 37, 0.4);
+    }
+  }
+
+  .delay-1000 {
+    animation-delay: 1s;
+  }
+
+  .delay-2000 {
+    animation-delay: 2s;
   }
 
   .navy-color {

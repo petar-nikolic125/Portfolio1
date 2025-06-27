@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { workExperience, education } from "@/data/portfolio";
 import { Button } from "@/components/ui/button";
 
@@ -10,25 +10,31 @@ export default function WorkEducation() {
       <div className="max-w-4xl mx-auto">
         {/* Toggle Switch */}
         <div className="flex justify-center mb-12">
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-full p-1 border border-gray-700/50">
+          <div className="relative bg-gray-800/50 backdrop-blur-sm rounded-full p-1 border border-gray-700/50 shadow-lg">
+            {/* Animated Background Pill */}
+            <div 
+              className={`absolute top-1 w-[calc(50%-4px)] h-[calc(100%-8px)] bg-gradient-to-r from-navy to-navy/80 rounded-full transition-all duration-500 ease-out shadow-md ${
+                activeTab === 'work' ? 'left-1' : 'left-[calc(50%+2px)]'
+              }`}
+            />
             <Button
               onClick={() => setActiveTab('work')}
-              variant={activeTab === 'work' ? 'default' : 'ghost'}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-250 ${
+              variant="ghost"
+              className={`relative z-10 px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeTab === 'work' 
-                  ? 'bg-gray-700 text-gray-100' 
-                  : 'text-gray-400 hover:text-gray-300'
+                  ? 'text-gray-100 hover:bg-transparent' 
+                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
               }`}
             >
               Work
             </Button>
             <Button
               onClick={() => setActiveTab('education')}
-              variant={activeTab === 'education' ? 'default' : 'ghost'}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-250 ${
+              variant="ghost"
+              className={`relative z-10 px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeTab === 'education' 
-                  ? 'bg-gray-700 text-gray-100' 
-                  : 'text-gray-400 hover:text-gray-300'
+                  ? 'text-gray-100 hover:bg-transparent' 
+                  : 'text-gray-400 hover:text-gray-300 hover:bg-gray-700/30'
               }`}
             >
               Education

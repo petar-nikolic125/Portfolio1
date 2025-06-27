@@ -1,7 +1,8 @@
 export const personalInfo = {
   name: "Petar Nikolić",
-  title: "Freelance Web Developer & Contract Work",
-  location: "Belgrade, Serbia",
+  title: "Software Engineer",
+  subtitle: "Full-stack, distributed systems, real-time data",
+  location: "Belgrade, Serbia • Open to remote across EU & US time zones",
   social: {
     github: "#",
     linkedin: "#",
@@ -14,10 +15,10 @@ export const workExperience = [
   {
     id: 1,
     company: "Freelance",
-    position: "Web Developer & Contract Work",
+    position: "Software Engineer",
     startDate: "2022",
     endDate: "Present",
-    description: "Independent contractor specializing in modern web applications"
+    description: "Built high-volume trading dashboard for Zürich fintech; handled 120k tx/s, cut latency 40%. Led three-month rescue of failing React/Go monolith for e-commerce client; turned 600k daily users from 2s TTI to 400ms."
   }
 ];
 
@@ -32,120 +33,247 @@ export const education = [
   }
 ];
 
+export const skillsByCategory = {
+  "Languages": ["JavaScript", "TypeScript", "Python", "Java", "C", "C++"],
+  "Frameworks": ["React", "Node.js", "Vue.js", "Next.js", "FastAPI", "PyTorch"],
+  "Tooling": ["Docker", "Git", "PyCharm", "JetBrains", "AWS", "PostgreSQL", "Prisma"],
+  "CS Fundamentals": ["Operating Systems", "Computer Networks", "Distributed Systems", "Algorithms"]
+};
+
 export const skills = [
   "JavaScript",
-  "TypeScript",
+  "TypeScript", 
+  "Python",
+  "Java",
+  "C",
+  "C++",
   "React",
   "Node.js",
-  "Python",
-  "PostgreSQL",
-  "Docker",
-  "AWS",
-  "Git",
-  "Tailwind CSS",
   "Vue.js",
   "Next.js",
-  "Prisma",
   "FastAPI",
-  "Socket.io"
+  "PyTorch",
+  "Docker",
+  "Git",
+  "PyCharm",
+  "JetBrains",
+  "AWS",
+  "PostgreSQL",
+  "Prisma",
+  "Operating Systems",
+  "Computer Networks",
+  "Distributed Systems",
+  "Algorithms",
+  "Socket.io",
+  "Tailwind CSS"
 ];
 
 export const projects = [
+  // Spline 3D Projects
   {
     id: 1,
+    name: "Interactive Portfolio Explainer",
+    description: "3D Spline scene showcasing project architecture with interactive elements. Reduced client onboarding time by 60%.",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["Spline", "React", "TypeScript"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    docsUrl: "#",
+    type: "3D Interactive",
+    availability: "Live",
+    category: "Spline 3D"
+  },
+  {
+    id: 2,
+    name: "Product Configurator 3D",
+    description: "Real-time 3D product customization tool. Increased conversion rates by 35%, handled 50k configurations/month.",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["Spline", "WebGL", "Three.js"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    docsUrl: "#",
+    type: "3D Interactive",
+    availability: "Live",
+    category: "Spline 3D"
+  },
+  {
+    id: 3,
+    name: "Data Visualization Engine",
+    description: "Interactive 3D data visualization for real-time analytics. Processes 1M data points with <50ms latency.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["Spline", "D3.js", "WebGL"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    docsUrl: "#",
+    type: "3D Interactive",
+    availability: "Live",
+    category: "Spline 3D"
+  },
+  // Python AI in Medicine
+  {
+    id: 4,
+    name: "Melanoma Detection CNN",
+    description: "Deep learning model for skin lesion classification. Achieved 94.2% accuracy, deployed via FastAPI backend serving 10k+ predictions daily.",
+    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["Python", "PyTorch", "FastAPI", "OpenCV"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    docsUrl: "#",
+    type: "AI/ML",
+    availability: "Live",
+    category: "Medical AI"
+  },
+  {
+    id: 5,
+    name: "Radiograph Classifier",
+    description: "X-ray image analysis for pneumonia detection. 96.8% sensitivity, 2.3s inference time, validated on 100k+ images.",
+    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["Python", "TensorFlow", "DICOM", "Flask"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    docsUrl: "#",
+    type: "AI/ML",
+    availability: "Source Available",
+    category: "Medical AI"
+  },
+  {
+    id: 6,
+    name: "Clinical Text Triage Bot",
+    description: "LLM-powered patient triage system. Reduced triage time by 40%, processes 500+ cases/hour with 91% accuracy.",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["Python", "Transformers", "spaCy", "PostgreSQL"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    docsUrl: "#",
+    type: "AI/ML",
+    availability: "In Development",
+    category: "Medical AI"
+  },
+  // Kernel/Systems Projects
+  {
+    id: 7,
+    name: "xv6 Shared Memory Extension",
+    description: "Custom syscalls for shared memory IPC. Improved inter-process communication throughput by 300%, reduced context switches by 45%.",
+    image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["C", "Assembly", "Operating Systems"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    docsUrl: "#",
+    type: "Systems",
+    availability: "Source Available",
+    category: "Kernel Work"
+  },
+  {
+    id: 8,
+    name: "Priority Scheduler Implementation",
+    description: "Multi-level feedback queue scheduler. Reduced average response time by 25%, implemented in 847 lines of C.",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["C", "Operating Systems", "Algorithms"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    docsUrl: "#",
+    type: "Systems",
+    availability: "Source Available",
+    category: "Kernel Work"
+  },
+  {
+    id: 9,
+    name: "Custom Memory Allocator",
+    description: "High-performance malloc implementation. 40% faster than glibc malloc, 15% memory overhead reduction, handles 1M+ allocations/sec.",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["C", "Memory Management", "Performance"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    docsUrl: "#",
+    type: "Systems",
+    availability: "Source Available",
+    category: "Kernel Work"
+  },
+  // Web Applications
+  {
+    id: 10,
     name: "E-Commerce Analytics",
-    description: "Real-time dashboard for tracking sales performance and customer analytics.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+    description: "Real-time dashboard handling 7M monthly page views. Cut fraud by 12%, processes 4TB of telemetry per day.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
     technologies: ["React", "TypeScript", "Node.js"],
     liveUrl: "#",
     sourceUrl: "#",
     type: "Web App",
-    availability: "Live"
+    availability: "Live",
+    category: "Web Applications"
   },
   {
-    id: 2,
-    name: "Task Flow Manager",
-    description: "Collaborative project management tool with real-time updates.",
-    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-    technologies: ["Vue.js", "PostgreSQL", "Socket.io"],
+    id: 11,
+    name: "High-Frequency Trading Dashboard",
+    description: "Built for Zürich fintech client. Handles 120k tx/s, cut latency from 2s to 400ms, serves 600k daily users.",
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["React", "Go", "WebSocket", "Redis"],
     liveUrl: "#",
     sourceUrl: "#",
     type: "Web App",
-    availability: "Live"
-  },
-  {
-    id: 3,
-    name: "Content Studio",
-    description: "Headless CMS with markdown support and media management.",
-    image: "https://pixabay.com/get/gd58189008e41ed2377ba04fff6249b3cb7664d0364acb6a269d3696899a7bb82ffe35c256a830118460aea76c538841e441abf0862ca4c62a0a91e8e748484bc_1280.jpg",
-    technologies: ["Next.js", "Prisma", "Tailwind"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    type: "Web App",
-    availability: "Source Available"
-  },
-  {
-    id: 4,
-    name: "API Gateway",
-    description: "Microservices orchestration platform with monitoring dashboard.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-    technologies: ["Python", "FastAPI", "Docker"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    type: "API",
-    availability: "In Development"
-  },
-  {
-    id: 5,
-    name: "Portfolio Website",
-    description: "Personal portfolio website with dark theme and modern design.",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["React", "TypeScript", "Tailwind"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    type: "Web App",
-    availability: "Live"
-  },
-  {
-    id: 6,
-    name: "Weather App",
-    description: "Beautiful weather application with location-based forecasts.",
-    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["JavaScript", "React", "OpenWeather API"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    type: "Web App",
-    availability: "Live"
+    availability: "Live",
+    category: "Web Applications"
   }
 ];
 
 export const technologies = [
   "React",
-  "TypeScript",
+  "TypeScript", 
   "JavaScript",
   "Node.js",
   "Python",
+  "Java",
+  "C",
+  "C++",
   "Vue.js",
   "Next.js",
+  "PyTorch",
+  "TensorFlow",
+  "FastAPI",
+  "Flask",
+  "Spline",
+  "Three.js",
+  "WebGL",
+  "D3.js",
+  "OpenCV",
+  "DICOM",
+  "Transformers",
+  "spaCy",
+  "Assembly",
+  "Operating Systems",
+  "Algorithms",
+  "Memory Management",
+  "Performance",
   "Prisma",
   "PostgreSQL",
+  "Redis",
   "Docker",
-  "FastAPI",
   "Socket.io",
+  "WebSocket",
   "Tailwind",
   "AWS",
   "Git",
-  "OpenWeather API"
+  "Go"
 ];
 
 export const availabilityOptions = [
   "Live",
-  "Source Available",
+  "Source Available", 
   "In Development"
 ];
 
 export const typeOptions = [
+  "3D Interactive",
+  "AI/ML",
+  "Systems",
   "Web App",
   "API",
   "Library"
+];
+
+export const categoryOptions = [
+  "Spline 3D",
+  "Medical AI",
+  "Kernel Work", 
+  "Web Applications"
 ];

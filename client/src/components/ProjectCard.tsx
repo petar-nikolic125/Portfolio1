@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, FileText } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,6 +12,9 @@ interface ProjectCardProps {
     technologies: string[];
     liveUrl?: string;
     sourceUrl?: string;
+    docsUrl?: string;
+    type: string;
+    category?: string;
   };
 }
 
@@ -41,7 +44,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </Badge>
           ))}
         </div>
-        <div className="flex space-x-4">
+        <div className="flex flex-wrap gap-3">
           {project.liveUrl && (
             <a 
               href={project.liveUrl} 
@@ -58,6 +61,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             >
               <SiGithub className="w-3 h-3 mr-1" />
               Source Code
+            </a>
+          )}
+          {project.docsUrl && (
+            <a 
+              href={project.docsUrl} 
+              className="text-gray-400 hover:text-gray-100 hover:underline text-sm transition-colors duration-300 flex items-center"
+            >
+              <FileText className="w-3 h-3 mr-1" />
+              Docs
             </a>
           )}
         </div>

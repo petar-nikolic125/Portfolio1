@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a modern single-page personal portfolio application designed with minimalist aesthetics inspired by premium business card design. The application showcases professional information, work experience, education, skills, and projects in an elegant, responsive interface.
+This is an elite software engineer portfolio application designed to showcase Petar Nikolić as a top-tier polyglot systems engineer. The portfolio features sophisticated dark theme aesthetics, interactive 3D elements, comprehensive project categorization, and professional-grade micro-interactions that convey technical excellence and attention to detail.
 
 ## System Architecture
 
@@ -30,11 +30,12 @@ This is a modern single-page personal portfolio application designed with minima
 ## Key Components
 
 ### Frontend Components
-1. **Hero Section**: Full-viewport introduction with personal branding
-2. **Work/Education Toggle**: Dynamic timeline displaying professional background
-3. **Skills Section**: Interactive skill badges with hover effects
-4. **Projects Gallery**: Masonry grid layout with filtering capabilities
-5. **Footer**: Social links and contact information
+1. **Hero Section**: Full-viewport introduction with 3D background animations, enhanced micro-interactions, and keyboard shortcuts (R for resume, G for GitHub)
+2. **Work/Education Toggle**: Butter-smooth animated pill toggle with professional impact metrics and gradient transitions
+3. **Skills Section**: Categorized skill display (Languages, Frameworks, Tooling, CS Fundamentals) with enhanced hover effects
+4. **Projects Gallery**: Multi-category showcase featuring Spline 3D, Medical AI, Kernel Work, and Web Applications with performance metrics
+5. **Interactive 3D More Projects Tile**: Animated portal to dedicated projects index with particle effects and hover transformations
+6. **Enhanced Projects Index**: Category filtering, documentation links, and comprehensive project metrics table
 
 ### Backend Infrastructure
 1. **Express Server**: RESTful API with middleware for logging and error handling
@@ -94,15 +95,28 @@ This is a modern single-page personal portfolio application designed with minima
 3. Database migrations applied via Drizzle Kit
 4. Environment-specific configuration loaded at runtime
 
-## Changelog
+## Recent Changes
 
-```
-Changelog:
-- June 27, 2025. Initial setup
-```
+### June 27, 2025 - Elite Portfolio Transformation
+- **Professional Rebranding**: Updated title from "Freelance Web Developer" to "Software Engineer" with subtitle "Full-stack, distributed systems, real-time data"
+- **Enhanced Project Categories**: Added Spline 3D projects, Python AI in Medicine, and Kernel Work with concrete performance metrics
+- **Advanced Skills Organization**: Implemented categorized skills display (Languages, Frameworks, Tooling, CS Fundamentals)
+- **Interactive 3D Elements**: Added subtle background animations, interactive "More Projects" tile with particle effects
+- **Micro-Interactions**: Enhanced button animations, butter-smooth toggle transitions, hover effects with scale and shadow
+- **Professional Metrics**: All projects now include concrete impact numbers (accuracy, latency, throughput, performance gains)
+- **Documentation Integration**: Added docs links for technical projects, enhanced projects table with category filtering
+- **Keyboard Shortcuts**: Implemented R (resume) and G (GitHub) shortcuts for power-user experience
+- **Advanced Filtering**: Projects page now supports category, technology, availability, and type filtering
+
+### Project Categories Added:
+1. **Spline 3D**: Interactive portfolio explainer, product configurator, data visualization engine
+2. **Medical AI**: Melanoma detection CNN (94.2% accuracy), radiograph classifier (96.8% sensitivity), clinical triage bot
+3. **Kernel Work**: xv6 shared memory extension, priority scheduler, custom memory allocator
+4. **Web Applications**: Enhanced with specific performance metrics and client impact data
 
 ## User Preferences
 
 ```
 Preferred communication style: Simple, everyday language.
+Professional positioning: Elite software engineer focused on systems-level work and technical excellence.
 ```
