@@ -1,0 +1,82 @@
+### Updated brief for Loveable — final layout, content & motion
+
+*(No code, just structure + style directives)*
+
+---
+
+## 1 Section order (single-page CV flow)
+
+| # | Section              | Notes                                                                                                                                                                                 |
+| - | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 | **Hero**             | Already done.                                                                                                                                                                         |
+| 2 | **Work / Education** | Toggle pill; see §3 for new content.                                                                                                                                                  |
+| 3 | **Skills**           | Four columns (Languages · Frameworks · Tooling · CS Fundamentals).                                                                                                                    |
+| 4 | **Projects**         | Masonry grid **immediately** after Skills—this now **includes every project**; there is **no separate “All Projects” route**. Filtering / search stay, but work entirely client-side. |
+
+Remove excess vertical padding so the next section teaser is always visible at the bottom of the screen.
+
+---
+
+## 2 Motion & polish (keep it *clean* but impressive)
+
+* **Global** – `scroll-snap-type: y mandatory` for section snaps, 500 ms smooth scroll.
+* **Hero** – typewriter tagline (already); add soft text-stroke glow on hover.
+* **Work/Education** –
+  • Toggle knob slides with spring; active card slides + fades.
+  • Bullet numbers count up (TS helper).
+* **Skills** – pills burst in radially from centre, stagger 20 ms.
+* **Projects grid** –
+  • Cards lazy-mount with scale-up 0.9→1 + fade.
+  • On hover card lifts 6 px; link icons slide in.
+  • Filter chips cascade like dominoes on first reveal.
+* **Progress indicator** right edge: slim bar grows with scroll (`transform: scaleY`).
+* Respect `prefers-reduced-motion`.
+
+---
+
+## 3 Content fabrication (add gravitas)
+
+### Work (freelance)
+
+| Period         | Title                             | Bullet impact (1-line each)                                                                                                                                                                                                                                                             |
+| -------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2022 – Present | **Software Engineer (Freelance)** | • Built high-volume trading dashboard for Zürich fintech; 120 k tx/s, cut latency 40 %.<br>• Rescued React/Go e-commerce monolith in 10 weeks; TTI 2 s→400 ms, +12 % conversion.<br>• Designed & shipped **Full-Stack Interactive Website Showcase** (live demo) to prove 60 fps WebGL. |
+
+### Education (RAF – Računarski fakultet, 2023 – Present)
+
+* Kernel research: **Shared-memory subsystem for xv6**; benchmarked 18 % throughput gain.
+* AI in Medicine: **CNN melanoma detector** (92 % AUC) + white-paper.
+* Capstone: **Psychotherapist Scheduling System** — JavaFX GUI + PostgreSQL; 99.5 % booking-success simulation.
+
+---
+
+## 4 Projects (replace existing list)
+
+| Name                                        | Category badge    | One-liner                                                                    |
+| ------------------------------------------- | ----------------- | ---------------------------------------------------------------------------- |
+| **Full-Stack Interactive Website Showcase** | *Website Display* | Real-time component assembly;                      |
+| **Shared-Memory Kernel Module**             | *Systems / C*     | Implemented System encrypion / decryption, shared memory management, altered ninode structures (you bullshit more)
+| **Melanoma Detection CNN**                  | *AI / Medicine*   | 92 % AUC on ISIC 2018; inference <45 ms on RTX 3060.                          |
+| **Psychotherapist Scheduler**               | *Enterprise Java* | Handles 10 k concurrent bookings; ACID via MySQL + PL/pgSQL + MySQLWorbench.            |
+| **Interactive Portfolio Explainer**         | *Motion Design*   | 3-scene CSS/JS animation that cut client onboarding time 60 %.               |
+| **Data Visualization Engine**               | *WebGL Charts*    | Streams 1 M points with <50 ms latency.                                      |
+
+*(Feel free to keep one or two existing cards if space permits.)*
+
+---
+
+## 5 Spacing hygiene
+
+* Top/bottom padding per section: **12 vh desktop**, **8 vh tablet**, **6 vh mobile**.
+* Gutters: 32 px desktop, 16 px mobile.
+* Max card height 460 px; ensure at least 30 px of the next section peeks into view.
+
+---
+
+### Deliverable recap
+
+1. Re-order sections to **Hero → Work/Education → Skills → Projects** on one page.
+2. Remove the standalone “All Projects” page; keep grid + filters in place here.
+3. Inject the fabricated kernel / AI-medicine / scheduling projects.
+4. Tighten vertical whitespace; add the outlined CSS+TypeScript animations.
+5. Maintain dark, minimalist aesthetic—tons of motion, zero clutter.

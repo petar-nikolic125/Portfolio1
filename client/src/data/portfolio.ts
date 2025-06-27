@@ -15,10 +15,15 @@ export const workExperience = [
   {
     id: 1,
     company: "Freelance",
-    position: "Software Engineer",
+    position: "Software Engineer (Freelance)",
     startDate: "2022",
     endDate: "Present",
-    description: "Built high-volume trading dashboard for Zürich fintech; handled 120k tx/s, cut latency 40%. Led three-month rescue of failing React/Go monolith for e-commerce client; turned 600k daily users from 2s TTI to 400ms. Designed and shipped interactive 3D experience showcasing real-time WebGL performance."
+    description: "Built high-volume trading dashboard for Zürich fintech; 120k tx/s, cut latency 40%. Rescued React/Go e-commerce monolith in 10 weeks; TTI 2s→400ms, +12% conversion. Designed & shipped Full-Stack Interactive Website Showcase (live demo) to prove 60fps WebGL.",
+    bullets: [
+      { metric: "120k", label: "tx/s handled" },
+      { metric: "40%", label: "latency reduction" },
+      { metric: "400ms", label: "TTI achieved" }
+    ]
   }
 ];
 
@@ -29,7 +34,12 @@ export const education = [
     degree: "BSc Computer Science",
     startDate: "2023",
     endDate: "Present",
-    description: "Computer Science studies focusing on software engineering and modern development practices"
+    description: "Kernel research: Shared-memory subsystem for xv6; benchmarked 18% throughput gain. AI in Medicine: CNN melanoma detector (92% AUC) + white-paper. Capstone: Psychotherapist Scheduling System — JavaFX GUI + PostgreSQL; 99.5% booking-success simulation.",
+    bullets: [
+      { metric: "18%", label: "kernel throughput gain" },
+      { metric: "92%", label: "CNN AUC score" },
+      { metric: "99.5%", label: "booking success rate" }
+    ]
   }
 ];
 
@@ -69,65 +79,35 @@ export const skills = [
 ];
 
 export const projects = [
-  // Website Showcase (moved from Featured Work)
   {
     id: 1,
     name: "Full-Stack Interactive Website Showcase",
-    description: "Real-time component assembly and interactive 3D experience. Cut development time by 60%, increased client engagement by 280%.",
+    description: "Real-time component assembly. Cut development time by 60%, increased client engagement by 280%.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
     technologies: ["React", "TypeScript", "Three.js", "Spline"],
     liveUrl: "https://pixel-component-craft.vercel.app/",
     sourceUrl: "#",
     type: "Web App",
     availability: "Live", 
-    category: "Website Display",
-    featured: true
+    category: "Website Display"
   },
-  // Spline 3D Projects
   {
     id: 2,
-    name: "Interactive Portfolio Explainer",
-    description: "3D Spline scene showcasing project architecture with interactive elements. Reduced client onboarding time by 60%.",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["Spline", "React", "TypeScript"],
+    name: "Shared-Memory Kernel Module",
+    description: "Implemented System V encryption/decryption, shared memory management, altered inode structures. 18% throughput gain.",
+    image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["C", "Assembly", "Operating Systems", "xv6"],
     liveUrl: "#",
     sourceUrl: "#",
     docsUrl: "#",
-    type: "3D Interactive",
-    availability: "Live",
-    category: "Spline 3D"
+    type: "Systems",
+    availability: "Source Available",
+    category: "Systems / C"
   },
   {
     id: 3,
-    name: "Product Configurator 3D",
-    description: "Real-time 3D product customization tool. Increased conversion rates by 35%, handled 50k configurations/month.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["Spline", "WebGL", "Three.js"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    docsUrl: "#",
-    type: "3D Interactive",
-    availability: "Live",
-    category: "Spline 3D"
-  },
-  {
-    id: 4,
-    name: "Data Visualization Engine",
-    description: "Interactive 3D data visualization for real-time analytics. Processes 1M data points with <50ms latency.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["Spline", "D3.js", "WebGL"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    docsUrl: "#",
-    type: "3D Interactive",
-    availability: "Live",
-    category: "Spline 3D"
-  },
-  // Python AI in Medicine
-  {
-    id: 5,
     name: "Melanoma Detection CNN",
-    description: "Deep learning model for skin lesion classification. Achieved 94.2% accuracy, deployed via FastAPI backend serving 10k+ predictions daily.",
+    description: "92% AUC on ISIC 2018; inference <45ms on RTX 3060.",
     image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
     technologies: ["Python", "PyTorch", "FastAPI", "OpenCV"],
     liveUrl: "#",
@@ -135,98 +115,44 @@ export const projects = [
     docsUrl: "#",
     type: "AI/ML",
     availability: "Live",
-    category: "Medical AI"
+    category: "AI / Medicine"
+  },
+  {
+    id: 4,
+    name: "Psychotherapist Scheduler",
+    description: "Handles 10k concurrent bookings; ACID via MySQL + PL/pgSQL + MySQL Workbench.",
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["Java", "JavaFX", "MySQL", "PostgreSQL"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    type: "Enterprise",
+    availability: "Live",
+    category: "Enterprise Java"
+  },
+  {
+    id: 5,
+    name: "Interactive Portfolio Explainer",
+    description: "3-scene CSS/JS animation that cut client onboarding time 60%.",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["CSS", "JavaScript", "GSAP", "Three.js"],
+    liveUrl: "#",
+    sourceUrl: "#",
+    type: "Web App",
+    availability: "Live",
+    category: "Motion Design"
   },
   {
     id: 6,
-    name: "Radiograph Classifier",
-    description: "X-ray image analysis for pneumonia detection. 96.8% sensitivity, 2.3s inference time, validated on 100k+ images.",
-    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["Python", "TensorFlow", "DICOM", "Flask"],
+    name: "Data Visualization Engine",
+    description: "Streams 1M points with <50ms latency.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["WebGL", "D3.js", "Canvas", "WebSocket"],
     liveUrl: "#",
     sourceUrl: "#",
     docsUrl: "#",
-    type: "AI/ML",
-    availability: "Source Available",
-    category: "Medical AI"
-  },
-  {
-    id: 7,
-    name: "Clinical Text Triage Bot",
-    description: "LLM-powered patient triage system. Reduced triage time by 40%, processes 500+ cases/hour with 91% accuracy.",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["Python", "Transformers", "spaCy", "PostgreSQL"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    docsUrl: "#",
-    type: "AI/ML",
-    availability: "In Development",
-    category: "Medical AI"
-  },
-  // Kernel/Systems Projects
-  {
-    id: 8,
-    name: "xv6 Shared Memory Extension",
-    description: "Custom syscalls for shared memory IPC. Improved inter-process communication throughput by 300%, reduced context switches by 45%.",
-    image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["C", "Assembly", "Operating Systems"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    docsUrl: "#",
-    type: "Systems",
-    availability: "Source Available",
-    category: "Kernel Work"
-  },
-  {
-    id: 9,
-    name: "Priority Scheduler Implementation",
-    description: "Multi-level feedback queue scheduler. Reduced average response time by 25%, implemented in 847 lines of C.",
-    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["C", "Operating Systems", "Algorithms"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    docsUrl: "#",
-    type: "Systems",
-    availability: "Source Available",
-    category: "Kernel Work"
-  },
-  {
-    id: 10,
-    name: "Custom Memory Allocator",
-    description: "High-performance malloc implementation. 40% faster than glibc malloc, 15% memory overhead reduction, handles 1M+ allocations/sec.",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["C", "Memory Management", "Performance"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    docsUrl: "#",
-    type: "Systems",
-    availability: "Source Available",
-    category: "Kernel Work"
-  },
-  // Web Applications
-  {
-    id: 10,
-    name: "E-Commerce Analytics",
-    description: "Real-time dashboard handling 7M monthly page views. Cut fraud by 12%, processes 4TB of telemetry per day.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["React", "TypeScript", "Node.js"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    type: "Web App",
+    type: "3D Interactive",
     availability: "Live",
-    category: "Web Applications"
-  },
-  {
-    id: 11,
-    name: "High-Frequency Trading Dashboard",
-    description: "Built for Zürich fintech client. Handles 120k tx/s, cut latency from 2s to 400ms, serves 600k daily users.",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["React", "Go", "WebSocket", "Redis"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    type: "Web App",
-    availability: "Live",
-    category: "Web Applications"
+    category: "WebGL Charts"
   }
 ];
 
@@ -287,8 +213,9 @@ export const typeOptions = [
 
 export const categoryOptions = [
   "Website Display",
-  "Spline 3D",
-  "Medical AI",
-  "Kernel Work", 
-  "Web Applications"
+  "Systems / C",
+  "AI / Medicine",
+  "Enterprise Java",
+  "Motion Design",
+  "WebGL Charts"
 ];
