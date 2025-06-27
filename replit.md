@@ -97,7 +97,15 @@ This is an elite software engineer portfolio application designed to showcase Pe
 
 ## Recent Changes
 
-### June 27, 2025 - Elite Portfolio Transformation
+### June 27, 2025 - CV-Like Structure Migration
+- **Removed Featured Work Section**: Eliminated the standalone Featured Work component to create cleaner CV flow
+- **Restructured Page Layout**: New section order: Hero → Work/Education → Projects → Skills & Contact
+- **Website Showcase Integration**: Moved "Interactive 3D Experience" into regular Projects grid as "Full-Stack Interactive Website Showcase"
+- **Category Badge System**: Added "Website Display" badge for the showcase project, maintaining consistent card sizing
+- **Clean Vertical Rhythm**: Restored logical CV order with no oversized detours before recruiter reaches experience
+- **Project Grid Enhancement**: First card now serves as showcase while maintaining uniform appearance with other project cards
+
+### Previous - Elite Portfolio Transformation  
 - **Professional Rebranding**: Updated title from "Freelance Web Developer" to "Software Engineer" with subtitle "Full-stack, distributed systems, real-time data"
 - **Enhanced Project Categories**: Added Spline 3D projects, Python AI in Medicine, and Kernel Work with concrete performance metrics
 - **Advanced Skills Organization**: Implemented categorized skills display (Languages, Frameworks, Tooling, CS Fundamentals)
@@ -108,11 +116,12 @@ This is an elite software engineer portfolio application designed to showcase Pe
 - **Keyboard Shortcuts**: Implemented R (resume) and G (GitHub) shortcuts for power-user experience
 - **Advanced Filtering**: Projects page now supports category, technology, availability, and type filtering
 
-### Project Categories Added:
-1. **Spline 3D**: Interactive portfolio explainer, product configurator, data visualization engine
-2. **Medical AI**: Melanoma detection CNN (94.2% accuracy), radiograph classifier (96.8% sensitivity), clinical triage bot
-3. **Kernel Work**: xv6 shared memory extension, priority scheduler, custom memory allocator
-4. **Web Applications**: Enhanced with specific performance metrics and client impact data
+### Project Categories:
+1. **Website Display**: Full-stack interactive website showcase (moved from Featured Work)
+2. **Spline 3D**: Interactive portfolio explainer, product configurator, data visualization engine
+3. **Medical AI**: Melanoma detection CNN (94.2% accuracy), radiograph classifier (96.8% sensitivity), clinical triage bot
+4. **Kernel Work**: xv6 shared memory extension, priority scheduler, custom memory allocator
+5. **Web Applications**: Enhanced with specific performance metrics and client impact data
 
 ## User Preferences
 

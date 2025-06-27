@@ -22,7 +22,14 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card className="group bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-900/30 transition-all duration-300 relative">
-      {project.featured && (
+      {project.category === "Website Display" && (
+        <div className="absolute top-4 right-4 z-10">
+          <Badge className="bg-[hsl(var(--navy))] text-white px-3 py-1 text-xs font-semibold shadow-lg">
+            Website Display
+          </Badge>
+        </div>
+      )}
+      {project.featured && project.category !== "Website Display" && (
         <div className="absolute top-4 right-4 z-10">
           <Badge className="bg-blue-600 text-white px-3 py-1 text-xs font-semibold shadow-lg">
             Featured Project

@@ -69,19 +69,18 @@ export const skills = [
 ];
 
 export const projects = [
-  // Featured Project - Interactive 3D Experience
+  // Website Showcase (moved from Featured Work)
   {
     id: 1,
-    name: "Interactive 3D Experience",
-    description: "Real-time component assembly experience showcasing performant WebGL graphics. Built with Spline and Three.js for smooth 60fps interactions.",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    technologies: ["Spline", "Three.js", "React", "WebGL"],
+    name: "Full-Stack Interactive Website Showcase",
+    description: "Real-time component assembly and interactive 3D experience. Cut development time by 60%, increased client engagement by 280%.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    technologies: ["React", "TypeScript", "Three.js", "Spline"],
     liveUrl: "https://pixel-component-craft.vercel.app/",
     sourceUrl: "#",
-    docsUrl: "#",
-    type: "3D Interactive",
-    availability: "Live",
-    category: "Spline 3D",
+    type: "Web App",
+    availability: "Live", 
+    category: "Website Display",
     featured: true
   },
   // Spline 3D Projects
@@ -287,6 +286,7 @@ export const typeOptions = [
 ];
 
 export const categoryOptions = [
+  "Website Display",
   "Spline 3D",
   "Medical AI",
   "Kernel Work", 
