@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function FeaturedWork() {
@@ -37,17 +37,24 @@ export default function FeaturedWork() {
     setIs3DLoaded(true);
   };
 
+  const scrollToNext = () => {
+    const nextSection = document.querySelector('[data-section="work-education"]');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative bg-gray-950 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h2 className="font-serif font-bold text-4xl text-gray-100 text-center mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 className="font-serif font-bold text-4xl text-gray-100 text-center mb-8">
           Featured Work
         </h2>
         
-        {/* Oversized Project Card */}
+        {/* Responsive Project Card */}
         <div 
           className={`relative bg-gradient-to-br from-gray-900 to-gray-950 rounded-xl border border-gray-800 overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl hover:shadow-navy/30 ${
-            isMobile ? 'h-[60vh]' : 'h-screen max-h-[90vh]'
+            isMobile ? 'h-[35vh] min-h-[280px]' : 'h-[60vh] max-h-[500px]'
           }`}
           onClick={handleOpenDemo}
           onKeyDown={handleKeyDown}
@@ -55,27 +62,27 @@ export default function FeaturedWork() {
           role="button"
           aria-label="View Pixel Component Craft live demo"
         >
-          {/* 3D Scene Container */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-950/20 to-gray-950/60">
+          {/* Reduced Gradient Overlay - Only 20% of card height */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-950/60" style={{ background: 'linear-gradient(to bottom, transparent 80%, rgba(3, 7, 18, 0.6) 100%)' }}>
             {!is3DLoaded ? (
-              // Placeholder/Loading State
-              <div className="h-full flex flex-col items-center justify-center">
+              // Placeholder/Loading State with tighter spacing
+              <div className="h-full flex flex-col items-center justify-center px-4">
                 <div className="relative">
-                  {/* Static preview or loading animation */}
-                  <div className="w-64 h-64 bg-gradient-to-br from-navy/20 to-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+                  {/* Static preview */}
+                  <div className="w-48 h-48 bg-gradient-to-br from-navy/20 to-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <h3 className="font-serif text-3xl text-gray-100 mb-4">
+                    <div className="text-center space-y-3">
+                      <h3 className="font-serif text-2xl sm:text-3xl text-gray-100">
                         Pixel Component Craft
                       </h3>
-                      <p className="text-gray-400 mb-8">Interactive 3D Factory Experience</p>
+                      <p className="text-gray-400 text-sm">Interactive 3D Factory Experience</p>
                       {isMobile && !is3DLoaded && (
                         <Button 
                           onClick={(e) => {
                             e.stopPropagation();
                             load3D();
                           }}
-                          className="bg-navy text-gray-100 hover:bg-navy/90"
+                          className="bg-navy text-gray-100 hover:bg-navy/90 mt-4"
                         >
                           Load 3D Experience
                         </Button>
@@ -85,16 +92,15 @@ export default function FeaturedWork() {
                 </div>
               </div>
             ) : (
-              // 3D Spline Embed
+              // 3D Scene with tighter content spacing
               <div className="h-full w-full relative">
-                {/* Spline or Three.js scene would go here */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center z-10">
-                    <h3 className="font-serif text-4xl text-gray-100 mb-4 animate-fade-in">
+                  <div className="text-center z-10 space-y-2">
+                    <h3 className="font-serif text-2xl sm:text-3xl text-gray-100 animate-fade-in">
                       Pixel Component Craft Factory
                     </h3>
-                    <p className="text-gray-300 mb-2">Interactive 3D Experience</p>
-                    <p className="text-sm text-gray-400">Click anywhere to explore</p>
+                    <p className="text-gray-300 text-sm">Interactive 3D Experience</p>
+                    <p className="text-xs text-gray-400">Click anywhere to explore</p>
                   </div>
                 </div>
                 
@@ -108,11 +114,11 @@ export default function FeaturedWork() {
             )}
           </div>
           
-          {/* CTA Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-gray-950 via-gray-950/90 to-transparent">
+          {/* CTA positioned in visible area */}
+          <div className="absolute bottom-4 left-0 right-0 px-6">
             <div className="text-center">
               <Button 
-                className="group bg-navy text-gray-100 hover:bg-navy/90 hover:scale-105 transition-all duration-300 px-8 py-3"
+                className="group bg-navy text-gray-100 hover:bg-navy/90 hover:scale-105 transition-all duration-300 px-6 py-2"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleOpenDemo();
@@ -129,6 +135,20 @@ export default function FeaturedWork() {
             Animated factory assembling UI components into Petar Nikolić monogram. 
             Press Enter or click to view the live demo.
           </figcaption>
+        </div>
+
+        {/* Scroll hint arrow */}
+        <div className="flex justify-center mt-6">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={scrollToNext}
+            className="text-gray-500 hover:text-gray-300 transition-colors duration-300 flex items-center space-x-2"
+            aria-label="Scroll to next section"
+          >
+            <span className="text-xs uppercase tracking-wider">Continue</span>
+            <ChevronDown className="w-4 h-4 animate-bounce" />
+          </Button>
         </div>
       </div>
     </section>
