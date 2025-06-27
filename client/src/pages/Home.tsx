@@ -1,32 +1,11 @@
-import Hero from "@/components/Hero";
-import WorkEducation from "@/components/WorkEducation";
+import HeroEnhanced from "@/components/HeroEnhanced";
+import WorkEducationEnhanced from "@/components/WorkEducationEnhanced";
 import Skills from "@/components/Skills";
-import ProjectsShowcase from "@/components/ProjectsShowcase";
+import ProjectsEnhanced from "@/components/ProjectsEnhanced";
 import Footer from "@/components/Footer";
 import { useEffect } from "react";
 
 export default function Home() {
-  useEffect(() => {
-    // Add scroll snap to body
-    document.documentElement.style.scrollSnapType = 'y mandatory';
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    // Scroll progress tracking
-    const updateScrollProgress = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollProgress = window.scrollY / scrollHeight;
-      document.documentElement.style.setProperty('--scroll-progress', scrollProgress.toString());
-    };
-    
-    window.addEventListener('scroll', updateScrollProgress);
-    updateScrollProgress();
-    
-    return () => {
-      document.documentElement.style.scrollSnapType = '';
-      document.documentElement.style.scrollBehavior = '';
-      window.removeEventListener('scroll', updateScrollProgress);
-    };
-  }, []);
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100 relative">
@@ -40,10 +19,10 @@ export default function Home() {
         />
       </div>
       
-      <Hero />
-      <WorkEducation />
+      <HeroEnhanced />
+      <WorkEducationEnhanced />
       <Skills />
-      <ProjectsShowcase />
+      <ProjectsEnhanced />
       <Footer />
     </div>
   );

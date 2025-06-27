@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Variables for animations and theming */
+@layer base {
+  :root {
+    /* Animation easings */
+    --spring: cubic-bezier(0.22, 1.61, 0.36, 1);
+    --splat: cubic-bezier(0.69, -0.28, 0.38, 1.27);
+    --smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Colors */
+    --accent: hsl(239, 84%, 67%);
+    --hover-glow: hsla(239, 84%, 67%, 0.1);
+    --shadow-color: hsla(0, 0%, 0%, 0.3);
+    --border-accent: hsl(239, 84%, 77%);
+    
+    /* Durations */
+    --duration-fast: 300ms;
+    --duration-normal: 500ms;
+    --duration-slow: 700ms;
+    --duration-extra-slow: 1000ms;
+    
+    /* Spacing */
+    --section-padding: 6vh;
+  }
+}
+
 /* Advanced animation keyframes */
 @keyframes fade-slide-in {
   from {
@@ -14,23 +40,66 @@
   }
 }
 
-@keyframes pulse-pop {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-@keyframes domino-cascade {
+@keyframes slide-up-fade {
   from {
     opacity: 0;
-    transform: translateY(-20px) rotateX(-90deg);
+    transform: translateY(30px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotateX(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes badge-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+}
+
+@keyframes arrow-flutter {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-3px);
+  }
+  75% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes pulse-hint {
+  0% {
+    opacity: 0.4;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(5px) scale(1.1);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -64,69 +133,292 @@
   }
 }
 
-@keyframes bounce-twist {
+@keyframes border-cycle {
   0%, 100% {
-    transform: rotate(0deg) scale(1);
+    border-left-color: var(--accent);
   }
   25% {
-    transform: rotate(-5deg) scale(0.95);
+    border-left-color: hsl(259, 84%, 67%);
+  }
+  50% {
+    border-left-color: hsl(279, 84%, 67%);
   }
   75% {
-    transform: rotate(5deg) scale(1.05);
+    border-left-color: hsl(219, 84%, 67%);
   }
 }
 
-@keyframes shadow-drift {
+@keyframes text-flicker {
   0%, 100% {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    text-shadow: 0 0 2px rgba(99, 102, 241, 0.5);
   }
   50% {
-    box-shadow: 4px 8px 12px -2px rgba(0, 0, 0, 0.15),
-                2px 4px 8px -2px rgba(0, 0, 0, 0.08);
+    text-shadow: 0 0 8px rgba(99, 102, 241, 0.8),
+                 0 0 16px rgba(99, 102, 241, 0.4);
   }
 }
 
-@keyframes float-subtle {
+@keyframes wiggle-arrow {
   0%, 100% {
-    transform: translateY(0);
+    transform: translateX(0) rotate(0deg);
   }
-  50% {
-    transform: translateY(-10px);
+  25% {
+    transform: translateX(2px) rotate(-5deg);
+  }
+  75% {
+    transform: translateX(-2px) rotate(5deg);
   }
 }
 
 @keyframes radial-burst {
   0% {
     opacity: 0;
-    transform: scale(0) translate(
-      calc(cos(var(--burst-angle, 0deg)) * 50px),
-      calc(sin(var(--burst-angle, 0deg)) * 50px)
-    );
+    transform: scale(0) rotate(0deg);
   }
   50% {
-    transform: scale(1.1) translate(
-      calc(cos(var(--burst-angle, 0deg)) * 10px),
-      calc(sin(var(--burst-angle, 0deg)) * 10px)
-    );
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
   }
   100% {
     opacity: 1;
-    transform: scale(1) translate(0, 0);
+    transform: scale(1) rotate(360deg);
   }
 }
 
-.animate-radial-burst {
-  animation: radial-burst 800ms var(--ease-bounce) forwards;
+@keyframes grain-shift {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
 }
 
-/* Custom spring easings */
-:root {
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
-  --scroll-progress: 0;
+@keyframes parallax-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(var(--parallax-offset, -20px));
+  }
+}
+
+@keyframes count-up {
+  from {
+    --num: 0;
+  }
+  to {
+    --num: var(--target);
+  }
+}
+
+/* Utility classes for animations */
+@layer utilities {
+  .animate-fade-slide-in {
+    animation: fade-slide-in var(--duration-normal) var(--spring) both;
+  }
+  
+  .animate-slide-up-fade {
+    animation: slide-up-fade var(--duration-slow) var(--smooth) both;
+  }
+  
+  .animate-pop-in {
+    animation: pop-in var(--duration-normal) var(--splat) both;
+  }
+  
+  .animate-badge-pulse {
+    animation: badge-pulse 2s ease-in-out infinite;
+  }
+  
+  .animate-arrow-flutter {
+    animation: arrow-flutter 1.5s ease-in-out infinite;
+  }
+  
+  .animate-pulse-hint {
+    animation: pulse-hint 2s ease-in-out 3;
+    animation-fill-mode: forwards;
+  }
+  
+  /* Staggered animations */
+  .stagger-1 { animation-delay: 100ms; }
+  .stagger-2 { animation-delay: 200ms; }
+  .stagger-3 { animation-delay: 300ms; }
+  .stagger-4 { animation-delay: 400ms; }
+  .stagger-5 { animation-delay: 500ms; }
+  
+  /* Work list animations */
+  .work-list {
+    @apply space-y-4;
+  }
+  
+  .work-list li {
+    @apply relative pl-6 py-4 pr-4 rounded-lg transition-all duration-300;
+    @apply hover:bg-[var(--hover-glow)] hover:scale-[1.02];
+    @apply border-l-2 border-transparent hover:border-l-4 hover:border-[var(--accent)];
+    animation: slide-up-fade var(--duration-normal) var(--spring) both;
+  }
+  
+  .work-list li:nth-child(1) { animation-delay: 100ms; }
+  .work-list li:nth-child(2) { animation-delay: 200ms; }
+  .work-list li:nth-child(3) { animation-delay: 300ms; }
+  .work-list li:nth-child(4) { animation-delay: 400ms; }
+  .work-list li:nth-child(5) { animation-delay: 500ms; }
+  
+  .work-list li:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s var(--spring), border-left 0.2s ease-out;
+  }
+  
+  /* Education bullets with special hover */
+  .education-list li {
+    animation: fade-slide-in var(--duration-normal) var(--smooth) both;
+    animation-direction: alternate;
+  }
+  
+  .education-list li:hover {
+    animation: border-cycle 2s linear infinite, text-flicker 1.5s ease-in-out infinite;
+  }
+  
+  /* Skills grid burst animation */
+  .skills-grid-item {
+    animation: pop-in var(--duration-fast) var(--splat) both;
+    transform-origin: center;
+  }
+  
+  .skills-grid-item:hover {
+    background: linear-gradient(45deg, var(--accent), var(--border-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: skewX(3deg);
+  }
+  
+  /* Project card animations */
+  .project-card-enter {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  }
+  
+  .project-card-entered {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    transition: all var(--duration-normal) var(--spring);
+  }
+  
+  .project-card:hover {
+    border: 2px solid var(--accent);
+    box-shadow: 0 10px 20px var(--shadow-color);
+  }
+  
+  /* Grain overlay using CSS */
+  .grain-overlay {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    width: 200%;
+    height: 200%;
+    opacity: 0.04;
+    z-index: 1;
+    pointer-events: none;
+    animation: grain-shift 8s steps(10) infinite;
+  }
+  
+  .grain-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 1px,
+        rgba(255, 255, 255, 0.03) 1px,
+        rgba(255, 255, 255, 0.03) 2px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 1px,
+        rgba(255, 255, 255, 0.02) 1px,
+        rgba(255, 255, 255, 0.02) 2px
+      );
+  }
+  
+  /* Scroll hint arrow */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: pulse-hint 2s ease-in-out 3;
+  }
+  
+  /* Toggle knob animation */
+  .toggle-knob {
+    transition: transform 0.3s var(--spring);
+  }
+  
+  .toggle-active .toggle-knob {
+    transform: translateX(100%);
+  }
+  
+  /* Parallax layers */
+  .parallax-layer-1 {
+    animation: parallax-drift 20s ease-in-out infinite alternate;
+    --parallax-offset: -10px;
+  }
+  
+  .parallax-layer-2 {
+    animation: parallax-drift 30s ease-in-out infinite alternate;
+    --parallax-offset: -20px;
+  }
+}
+
+/* Container queries for responsive animations */
+@container (max-width: 600px) {
+  .work-list li,
+  .education-list li {
+    animation-duration: calc(var(--duration-normal) * 0.5);
+  }
+  
+  @keyframes pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
 
 /* Section spacing */

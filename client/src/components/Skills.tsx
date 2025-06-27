@@ -24,7 +24,7 @@ export default function Skills() {
   }, [isVisible]);
 
   return (
-    <section ref={sectionRef} className="section-padding px-4 sm:px-6 lg:px-8 snap-section">
+    <section ref={sectionRef} className="section-padding px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <h2 className="font-serif font-bold text-4xl text-gray-100 text-center mb-16 animate-mask-reveal">Skills</h2>
         
