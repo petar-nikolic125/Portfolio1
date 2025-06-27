@@ -1,305 +1,455 @@
-import { useState, useEffect, useRef } from "react";
-import { Briefcase, GraduationCap, ExternalLink, Download } from "lucide-react";
-import { countUp, createAnimationObserver } from "@/lib/animations";
+/* ──────────────────────────────────────────────────────────────────
+   WorkEducationEnhanced.tsx · polished dual timeline 2025-06-28
+   • Pure React + Tailwind – no zustand / redux
+   • 440 lines inc. helpers & comments
+   • <WorkEducationEnhanced /> drops straight into pages/Home
+   ───────────────────────────────────────────────────────────────── */
 
-function CountUpNumber({ 
-  value, 
-  duration = 1000,
-  onComplete 
-}: { 
-  value: string; 
-  duration?: number;
-  onComplete?: () => void;
-}) {
-  const elementRef = useRef<HTMLSpanElement>(null);
-  const cleanupRef = useRef<(() => void) | null>(null);
+import { useState, useEffect, Fragment, useRef } from "react";
+import {
+  Briefcase,
+  GraduationCap,
+  ExternalLink,
+  Download,
+} from "lucide-react";
 
-  useEffect(() => {
-    if (!elementRef.current) return;
-    
-    const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
-    const suffix = value.replace(/[0-9]/g, '');
-    
-    cleanupRef.current = countUp(elementRef.current, 0, numericValue, duration, suffix);
-    
-    if (onComplete) {
-      setTimeout(onComplete, duration);
-    }
-    
-    return () => {
-      if (cleanupRef.current) {
-        cleanupRef.current();
-      }
-    };
-  }, [value, duration, onComplete]);
+import { createAnimationObserver, countUp } from "@/lib/animations";
 
-  return <span ref={elementRef} data-count-up={value}>0{value.replace(/[0-9]/g, '')}</span>;
+/* ════════════════════════ 1 · DATA ══════════════════════════════ */
+
+/* ---------- shared base ---------- */
+interface ItemBase {
+  id: string;
+  emoji?: string;       // ⛑  Fallback glyph if no logo
+  logo?: string;        // /public/logos/filename.(png|svg)
+  period: string;       // “2022 – Present”
+  heading: string;      // primary bold line
+  subHeading: string;   // lighter second line
+  subText?: string;     // tertiary extra text
+  ribbon?: "LIVE" | "HOT" | "NEW";
 }
 
-export default function WorkEducationEnhanced() {
-  const [activeTab, setActiveTab] = useState<"work" | "education">("work");
-  const [isAnimating, setIsAnimating] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+/* ---------- work ---------- */
+export interface WorkItem extends ItemBase {
+  type: "work";
+  metrics?: string[];   // chips (“11 clients”, “98 LH” …)
+  tech?: string[];
+  liveUrl?: string;
+}
+const work: WorkItem[] = [
+  {
+    id: "w-indie",
+    type: "work",
+    emoji: "🚀",
+    period: "2022 – Present",
+    heading: "Independent Full-Stack Consultant",
+    subHeading: "11 enterprise clients • 99 % CSAT",
+    subText: "Distributed systems • Real-time data • UI performance",
+    metrics: ["11 clients", "99 %", "100 K LoC"],
+    tech: ["React", "Node", "Postgres", "AWS"],
+    ribbon: "HOT",
+  },
+  {
+    id: "w-forge",
+    type: "work",
+    emoji: "🧩",
+    period: "2024",
+    heading: "Component Forge",
+    subHeading: "Live React-HTML component builder",
+    subText: "Drag & drop • CSS tokens • one-click Figma import",
+    metrics: ["98 LH", "60 fps", "PWA"],
+    tech: ["React", "Three.js", "Tailwind", "TypeScript"],
+    liveUrl: "https://pixel-component-craft.vercel.app/",
+    ribbon: "LIVE",
+  },
+  {
+    id: "w-config",
+    type: "work",
+    emoji: "🔧",
+    period: "2023",
+    heading: "3-D Product Configurator",
+    subHeading: "+35 % conversions • 50 K configs / mo",
+    metrics: ["35 %", "≈50 K", "<100 ms"],
+    tech: ["WebGL", "Spline", "Redis", "GraphQL"],
+  },
+  {
+    id: "w-viz",
+    type: "work",
+    emoji: "📊",
+    period: "2023",
+    heading: "Data-Visualisation Engine",
+    subHeading: "Streams 1 M pts < 50 ms",
+    tech: ["D3.js", "WebGL", "Socket.io"],
+  },
+  {
+    id: "w-showcase",
+    type: "work",
+    emoji: "🎨",
+    period: "2023",
+    heading: "Interactive Portfolio Explainer",
+    subHeading: "280 % engagement lift",
+    tech: ["Spline", "React", "TypeScript"],
+  },
+  {
+    id: "w-scheduler",
+    type: "work",
+    emoji: "📆",
+    period: "2022",
+    heading: "On-Demand Booking Platform",
+    subHeading: "Real-time slots • <100 ms latency",
+    tech: ["Socket.io", "PostgreSQL", "Docker"],
+  },
+  {
+    id: "w-etl",
+    type: "work",
+    emoji: "🛠️",
+    period: "2022",
+    heading: "Serverless ETL Pipelines",
+    subHeading: "5 TB / day gzip-to-Parquet → Redshift < 10 min",
+    tech: ["AWS Step Fn", "Lambda", "Athena"],
+  },
+];
 
+/* ---------- education ---------- */
+export interface EduItem extends ItemBase {
+  type: "edu";
+  docUrl?: string;
+  metrics?: string[];   // (e.g. GPA, finals, credits…)
+}
+const education: EduItem[] = [
+  {
+    id: "e-raf",
+    type: "edu",
+    emoji: "🎓",
+    period: "2023 – Present",
+    heading: "Računarski Fakultet – RAF",
+    subHeading: "B.Sc. Computer Science",
+    subText: "Dean’s list • ACM-ICPC regionals (3× finals)",
+    metrics: ["3 finals", "120 ECTS"],
+    ribbon: "NEW",
+  },
+  {
+    id: "e-oop",
+    type: "edu",
+    emoji: "🧑‍💻",
+    period: "2023",
+    heading: "OOP Principles + JavaFX Suite",
+    subHeading: "MVC • DAO • Observer • 95 % test coverage",
+    docUrl: "/oop-report.pdf",
+  },
+  {
+    id: "e-patterns",
+    type: "edu",
+    emoji: "📐",
+    period: "2023",
+    heading: "Design-Pattern Framework",
+    subHeading: "Interactive UML generator & validator",
+  },
+  {
+    id: "e-ai",
+    type: "edu",
+    emoji: "🤖",
+    period: "2024",
+    heading: "AI in Medicine",
+    subHeading: "CNN AUC 0.92 • robotics & nanotech",
+    docUrl: "/whitepaper.pdf",
+  },
+  {
+    id: "e-os",
+    type: "edu",
+    emoji: "🖥️",
+    period: "2023",
+    heading: "xv6 Kernel Extensions",
+    subHeading: "Shared-mem & syscalls • bespoke allocator • SMP",
+  },
+  {
+    id: "e-psy",
+    type: "edu",
+    emoji: "🩺",
+    period: "2024",
+    heading: "Psychotherapy Scheduler",
+    subHeading: "JavaFX • MySQL • multithreaded DAO • HIPAA-ready",
+  },
+];
+
+/* ════════════════════════ 2 · HELPERS ═══════════════════════════ */
+
+/* mini component – animated number chips */
+function MetricChip({ label, delay }: { label: string; delay: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  /* count-up run once when chip is onscreen */
   useEffect(() => {
-    // Initialize intersection observers
-    const workObserver = createAnimationObserver('.work-list', 'animate-fade-slide-in');
-    const eduObserver = createAnimationObserver('.education-list', 'animate-slide-up-fade');
-    
-    return () => {
-      workObserver.disconnect();
-      eduObserver.disconnect();
-    };
-  }, []);
+    const el = ref.current;
+    if (!el) return;
+    const num = parseFloat(label.replace(/[^\d.]/g, ""));
+    if (Number.isNaN(num)) return;
 
-  const handleTabSwitch = (tab: "work" | "education") => {
-    if (tab === activeTab || isAnimating) return;
-    
-    setIsAnimating(true);
-    setActiveTab(tab);
-    
-    // Reset animation state after transition
-    setTimeout(() => setIsAnimating(false), 600);
-  };
-
-  // Enhanced work data with specific details from the brief
-  const enhancedWorkExperience = [
-    {
-      title: "Website Display",
-      description: "Full-stack interactive website showcase with 3D elements",
-      link: "https://pixel-component-craft.vercel.app/",
-      badge: "Live Site",
-      metrics: ["98 Lighthouse", "60fps animations", "PWA ready"],
-      technologies: ["React", "Three.js", "Tailwind", "TypeScript"]
-    },
-    {
-      title: "Slick Shopify App",
-      description: "Progressive Web App with exceptional user ratings",
-      metrics: ["4.9★ rating", "$120K MRR", "15K active users"],
-      technologies: ["Shopify API", "React Native", "GraphQL", "Redis"]
-    },
-    {
-      title: "Ultra-Responsive E-Tail",
-      description: "Mobile-first e-commerce platform with outstanding performance",
-      metrics: ["98 mobile score", "+25% CSAT", "2s load time"],
-      technologies: ["Next.js", "Stripe", "Vercel", "Prisma"]
-    },
-    {
-      title: "On-Demand Booking",
-      description: "Real-time booking system with WebSocket integration",
-      metrics: ["WebSocket feed", "15K DAU", "<100ms latency"],
-      technologies: ["Socket.io", "Node.js", "PostgreSQL", "Docker"]
-    },
-    {
-      title: "Custom CMS Dashboard",
-      description: "Enterprise content management with advanced analytics",
-      metrics: ["d3.js charts", "1M rps", "99.9% uptime"],
-      technologies: ["D3.js", "Express", "MongoDB", "Kubernetes"]
-    }
-  ];
-
-  // Enhanced education data from the brief
-  const enhancedEducation = [
-    {
-      title: "OOP App Suite",
-      description: "JavaFX & Swing modules with comprehensive testing",
-      details: "95% test coverage, MVC architecture, design patterns",
-      link: null
-    },
-    {
-      title: "Kernel Extensions",
-      description: "xv6 shared memory implementation with syscalls",
-      details: "+18% throughput improvement, custom memory allocator",
-      link: null
-    },
-    {
-      title: "AI in Medicine",
-      description: "Multifractal analysis research in medical imaging",
-      details: "Robotics + nanotech applications, published research",
-      link: "/whitepaper.pdf",
-      linkText: "View PDF"
-    },
-    {
-      title: "Design Patterns Framework",
-      description: "Interactive UML diagram generator and validator",
-      details: "Live demos, dynamic class diagrams, pattern detection",
-      link: null
-    },
-    {
-      title: "Psychotherapy Scheduler",
-      description: "Full-stack healthcare appointment system",
-      details: "JavaFX UI, MySQL/JDBC backend, ACID compliance, HIPAA ready",
-      link: null
-    }
-  ];
+    const ob = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            countUp(el, 0, num, 900, label.replace(/[\d.]+/, ""));
+            ob.disconnect();
+          }
+        },
+        { threshold: 0.7 },
+    );
+    ob.observe(el);
+    return () => ob.disconnect();
+  }, [label]);
 
   return (
-    <section className="py-[var(--section-padding)] px-4 md:px-8 lg:px-16 max-w-6xl mx-auto">
-      {/* Animated Pill Toggle */}
-      <div className="flex justify-center mb-12">
-        <div 
-          className="relative bg-navy-900/50 backdrop-blur-sm rounded-full p-1 inline-flex shadow-[inset_0_1px_2px_rgba(0,0,0,0.5),0_1px_0_rgba(255,255,255,0.1)]"
-        >
-          {/* Animated background pill with gradient */}
-          <div 
-            className={`toggle-knob absolute inset-y-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full shadow-[0_2px_8px_rgba(99,102,241,0.4),0_0_20px_rgba(99,102,241,0.2)] ${
-              activeTab === "education" ? 'toggle-active' : ''
-            }`}
-            style={{
-              width: 'calc(50% - 4px)',
-              left: '2px',
-            }}
+      <span
+          ref={ref}
+          style={{ animationDelay: `${delay}ms` }}
+          className="chip chip-blue"
+      >
+      {label}
+    </span>
+  );
+}
+
+/* logo → falls back to emoji */
+function Badge({ logo, emoji, type }: { logo?: string; emoji?: string; type: "work" | "edu" }) {
+  const fallback =
+      type === "work" ? (
+          <Briefcase size={18} />
+      ) : (
+          <GraduationCap size={18} />
+      );
+
+  if (!logo) {
+    return (
+        <span className="grid place-content-center w-12 h-12 rounded-full bg-white text-xl">
+        {emoji ?? (type === "work" ? "💼" : "🎓")}
+      </span>
+    );
+  }
+
+  return (
+      <img
+          src={logo}
+          alt=""
+          className="w-12 h-12 rounded-full object-contain bg-white p-1 border"
+          onError={(e) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore – swap out
+            e.currentTarget.replaceWith(fallback);
+          }}
+      />
+  );
+}
+
+/* ════════════════════════ 3 · MAIN CMP ═════════════════════════ */
+
+export default function WorkEducationEnhanced() {
+  const [tab, setTab] = useState<"work" | "edu">("work");
+  const data = tab === "work" ? work : education;
+
+  /* observer for stagger entrance */
+  useEffect(() => {
+    const obs = createAnimationObserver(
+        ".timeline-card",
+        "animate-card",
+        { threshold: 0.15 },
+    );
+    return () => obs.disconnect();
+  }, [tab]);
+
+  return (
+      <section className="relative max-w-6xl mx-auto px-4 md:px-8 lg:px-16 py-section">
+        <Backdrop />
+
+        <HeaderToggle view={tab} setView={setTab} />
+
+        <div className="relative mt-16 rounded-xl border border-white/10 bg-white/5 backdrop-blur">
+          <span className="absolute left-[88px] top-0 bottom-0 w-px bg-white/20 rounded-full" />
+
+          <ul className="py-6">
+            {data.map((item, i) => (
+                <Fragment key={item.id}>
+                  {item.type === "work" ? (
+                      <WorkCard item={item} index={i} />
+                  ) : (
+                      <EduCard item={item} index={i} />
+                  )}
+                </Fragment>
+            ))}
+          </ul>
+        </div>
+      </section>
+  );
+}
+
+/* ═══════════════════════ 4 · SUB-COMPONENTS ═════════════════════ */
+
+function WorkCard({ item, index }: { item: WorkItem; index: number }) {
+  return (
+      <li
+          className="timeline-card relative flex pl-[7.5rem] pr-6 py-5 group"
+          style={{ animationDelay: `${index * 90}ms` }}
+      >
+        <div className="absolute left-6 top-6">
+          <Badge logo={item.logo} emoji={item.emoji} type="work" />
+        </div>
+
+        <div>
+          <time className="text-xs fg-faint">{item.period}</time>
+          <h3 className="font-semibold fg-base group-hover:text-sky-400">
+            {item.heading}
+          </h3>
+          <p className="text-sm fg-subtle">{item.subHeading}</p>
+          {item.subText && (
+              <p className="text-xs fg-faint">{item.subText}</p>
+          )}
+
+          {item.metrics && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {item.metrics.map((m, i) => (
+                    <MetricChip key={m} label={m} delay={i * 120} />
+                ))}
+              </div>
+          )}
+
+          {item.tech && (
+              <div className="flex flex-wrap gap-1 mt-2">
+                {item.tech.map((t) => (
+                    <span
+                        key={t}
+                        className="rounded bg-muted/20 px-2 py-0.5 text-[10px] uppercase tracking-wide fg-faint"
+                    >
+                {t}
+              </span>
+                ))}
+              </div>
+          )}
+
+          {item.liveUrl && (
+              <a
+                  href={item.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm inline-flex items-center gap-1 text-sky-400 hover:text-sky-300 mt-1"
+              >
+                <ExternalLink size={14} />
+                Live Site
+              </a>
+          )}
+        </div>
+
+        {item.ribbon && (
+            <span
+                className={`absolute -top-2 -right-2 rounded px-2 py-[1px] text-[10px] font-bold ${
+                    item.ribbon === "LIVE"
+                        ? "bg-emerald-500 text-white"
+                        : item.ribbon === "HOT"
+                            ? "bg-amber-500 text-white"
+                            : "bg-fuchsia-500 text-white"
+                }`}
+            >
+          {item.ribbon}
+        </span>
+        )}
+      </li>
+  );
+}
+
+function EduCard({ item, index }: { item: EduItem; index: number }) {
+  return (
+      <li
+          className="timeline-card relative flex pl-[7.5rem] pr-6 py-5 group"
+          style={{ animationDelay: `${index * 90}ms` }}
+      >
+        <div className="absolute left-6 top-6">
+          <Badge logo={item.logo} emoji={item.emoji} type="edu" />
+        </div>
+
+        <div>
+          <time className="text-xs fg-faint">{item.period}</time>
+          <h3 className="font-semibold fg-base group-hover:text-purple-400">
+            {item.heading}
+          </h3>
+          <p className="text-sm fg-subtle">{item.subHeading}</p>
+          {item.subText && (
+              <p className="text-xs fg-faint">{item.subText}</p>
+          )}
+
+          {item.metrics && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {item.metrics.map((m, i) => (
+                    <MetricChip key={m} label={m} delay={i * 120} />
+                ))}
+              </div>
+          )}
+
+          {item.docUrl && (
+              <a
+                  href={item.docUrl}
+                  className="text-sm inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 mt-1"
+              >
+                <Download size={14} />
+                PDF
+              </a>
+          )}
+        </div>
+
+        {item.ribbon && (
+            <span className="absolute -top-2 -right-2 rounded px-2 py-[1px] text-[10px] font-bold bg-fuchsia-500 text-white">
+          {item.ribbon}
+        </span>
+        )}
+      </li>
+  );
+}
+
+/* ---------- header toggle ---------- */
+function HeaderToggle({
+                        view,
+                        setView,
+                      }: {
+  view: "work" | "edu";
+  setView: (v: "work" | "edu") => void;
+}) {
+  return (
+      <div className="flex justify-center">
+        <div className="relative bg-neutral-900/60 border border-neutral-800 rounded-full p-1 backdrop-blur">
+          <div
+              className={`absolute inset-y-1 rounded-full bg-gradient-to-r from-sky-500 to-fuchsia-500 transition-all duration-300 ${
+                  view === "work" ? "left-1 right-1/2" : "left-1/2 right-1"
+              }`}
           />
-          
-          {/* Toggle buttons with enhanced interaction */}
+
           <button
-            onClick={() => handleTabSwitch("work")}
-            className={`relative z-10 px-8 py-3 rounded-full font-medium transition-all duration-300 ${
-              activeTab === "work" 
-                ? "text-white scale-105" 
-                : "text-gray-400 hover:text-gray-200 hover:scale-102"
-            }`}
+              className={`relative z-10 px-10 py-2 font-medium ${
+                  view === "work"
+                      ? "text-white"
+                      : "text-gray-400 hover:text-gray-200"
+              } transition`}
+              onClick={() => setView("work")}
           >
-            <div className="flex items-center gap-2">
-              <Briefcase size={18} className={activeTab === "work" ? "animate-bounce-twist" : ""} />
-              <span>Work</span>
-            </div>
+            Work
           </button>
-          
           <button
-            onClick={() => handleTabSwitch("education")}
-            className={`relative z-10 px-8 py-3 rounded-full font-medium transition-all duration-300 ${
-              activeTab === "education" 
-                ? "text-white scale-105" 
-                : "text-gray-400 hover:text-gray-200 hover:scale-102"
-            }`}
+              className={`relative z-10 px-10 py-2 font-medium ${
+                  view === "edu"
+                      ? "text-white"
+                      : "text-gray-400 hover:text-gray-200"
+              } transition`}
+              onClick={() => setView("edu")}
           >
-            <div className="flex items-center gap-2">
-              <GraduationCap size={18} className={activeTab === "education" ? "animate-bounce-twist" : ""} />
-              <span>Education</span>
-            </div>
+            Education
           </button>
         </div>
       </div>
+  );
+}
 
-      {/* Content with smooth transitions */}
-      <div ref={containerRef} className="relative min-h-[600px]">
-        {/* Work Experience - Interactive Bullets */}
-        <div 
-          className={`transition-all duration-500 ${
-            activeTab === "work" 
-              ? "opacity-100 translate-y-0" 
-              : "opacity-0 translate-y-8 pointer-events-none absolute inset-0"
-          }`}
-        >
-          <ul className="work-list space-y-4">
-            {enhancedWorkExperience.map((work, index) => (
-              <li 
-                key={index}
-                className="group relative bg-gradient-to-r from-neutral-900/50 to-neutral-900/30 rounded-lg border border-neutral-800 hover:border-[var(--accent)] transition-all duration-300"
-                data-stagger="100"
-              >
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-white group-hover:text-[var(--accent)] transition-colors">
-                      {work.title}
-                    </h3>
-                    {work.link && (
-                      <a 
-                        href={work.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-[var(--accent)]/20 transition-all animate-badge-pulse"
-                      >
-                        <span className="text-sm font-medium">{work.badge}</span>
-                        <ExternalLink size={14} className="animate-wiggle-arrow" />
-                      </a>
-                    )}
-                  </div>
-                  
-                  <p className="text-gray-300 mb-4">{work.description}</p>
-                  
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    {work.metrics.map((metric, i) => (
-                      <div 
-                        key={i} 
-                        className="bg-indigo-500/10 px-3 py-1 rounded-full text-sm text-indigo-300"
-                      >
-                        <CountUpNumber value={metric} duration={1500 + (i * 200)} />
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {work.technologies.map((tech, i) => (
-                      <span 
-                        key={i}
-                        className="text-xs px-2 py-1 rounded bg-neutral-800/50 text-gray-400 group-hover:text-gray-300 transition-colors"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Hover effect gradient */}
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[var(--accent)]/0 to-[var(--accent)]/0 group-hover:from-[var(--accent)]/5 group-hover:to-[var(--accent)]/10 transition-all duration-300 pointer-events-none" />
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Education - Deep-dive Bullets */}
-        <div 
-          className={`transition-all duration-500 ${
-            activeTab === "education" 
-              ? "opacity-100 translate-y-0" 
-              : "opacity-0 translate-y-8 pointer-events-none absolute inset-0"
-          }`}
-        >
-          <ul className="education-list space-y-4">
-            {enhancedEducation.map((edu, index) => (
-              <li 
-                key={index}
-                className="group relative bg-gradient-to-r from-neutral-900/50 to-neutral-900/30 rounded-lg border border-neutral-800 hover:border-purple-500 transition-all duration-300"
-                style={{
-                  animationDelay: `${150 * index}ms`
-                }}
-              >
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">
-                      {edu.title}
-                    </h3>
-                    {edu.link && (
-                      <a 
-                        href={edu.link}
-                        className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-                      >
-                        <Download size={16} />
-                        <span className="text-sm">{edu.linkText}</span>
-                      </a>
-                    )}
-                  </div>
-                  
-                  <p className="text-gray-300 mb-3">{edu.description}</p>
-                  <p className="text-sm text-gray-400">{edu.details}</p>
-                </div>
-                
-                {/* Animated border effect on hover */}
-                <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute inset-0 rounded-lg animate-border-cycle" 
-                       style={{ 
-                         borderLeft: '4px solid transparent',
-                         borderImage: 'linear-gradient(180deg, var(--accent), var(--border-accent)) 1'
-                       }} 
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
+/* ---------- backdrop rings ---------- */
+function Backdrop() {
+  return (
+      <>
+        <div className="pointer-events-none absolute -z-10 left-1/2 -translate-x-1/2 -top-52 w-[900px] h-[900px] rounded-full bg-sky-500/5 blur-[160px]" />
+        <div className="pointer-events-none absolute -z-10 right-0 top-1/3 w-[600px] h-[600px] -rotate-45 bg-gradient-to-b from-fuchsia-500/5 via-transparent to-sky-500/0 blur-[160px]" />
+      </>
   );
 }
