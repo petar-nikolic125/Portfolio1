@@ -60,7 +60,7 @@ export default function FeaturedWork() {
           onKeyDown={handleKeyDown}
           tabIndex={0}
           role="button"
-          aria-label="View Pixel Component Craft live demo"
+          aria-label="View interactive 3D experience"
         >
           {/* Reduced Gradient Overlay - Only 20% of card height */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-950/60" style={{ background: 'linear-gradient(to bottom, transparent 80%, rgba(3, 7, 18, 0.6) 100%)' }}>
@@ -73,9 +73,9 @@ export default function FeaturedWork() {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center space-y-3">
                       <h3 className="font-serif text-2xl sm:text-3xl text-gray-100">
-                        Pixel Component Craft
+                        Interactive 3D Experience
                       </h3>
-                      <p className="text-gray-400 text-sm">Interactive 3D Factory Experience</p>
+                      <p className="text-gray-400 text-sm">Real-time component assembly</p>
                       {isMobile && !is3DLoaded && (
                         <Button 
                           onClick={(e) => {
@@ -84,7 +84,7 @@ export default function FeaturedWork() {
                           }}
                           className="bg-navy text-gray-100 hover:bg-navy/90 mt-4"
                         >
-                          Load 3D Experience
+                          Load Experience
                         </Button>
                       )}
                     </div>
@@ -97,9 +97,9 @@ export default function FeaturedWork() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center z-10 space-y-2">
                     <h3 className="font-serif text-2xl sm:text-3xl text-gray-100 animate-fade-in">
-                      Pixel Component Craft Factory
+                      Interactive 3D Experience
                     </h3>
-                    <p className="text-gray-300 text-sm">Interactive 3D Experience</p>
+                    <p className="text-gray-300 text-sm">Real-time component assembly</p>
                     <p className="text-xs text-gray-400">Click anywhere to explore</p>
                   </div>
                 </div>
@@ -124,7 +124,7 @@ export default function FeaturedWork() {
                   handleOpenDemo();
                 }}
               >
-                <span className="mr-2">View the live factory</span>
+                <span className="mr-2">View live demo</span>
                 <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
@@ -132,7 +132,7 @@ export default function FeaturedWork() {
           
           {/* Accessibility Caption */}
           <figcaption className="sr-only">
-            Animated factory assembling UI components into Petar Nikolić monogram. 
+            Interactive 3D experience showcasing real-time component assembly. 
             Press Enter or click to view the live demo.
           </figcaption>
         </div>

@@ -18,7 +18,7 @@ export const workExperience = [
     position: "Software Engineer",
     startDate: "2022",
     endDate: "Present",
-    description: "Built high-volume trading dashboard for Zürich fintech; handled 120k tx/s, cut latency 40%. Led three-month rescue of failing React/Go monolith for e-commerce client; turned 600k daily users from 2s TTI to 400ms. Designed and shipped 'Pixel Component Craft' interactive 3D factory experience showcasing real-time WebGL performance."
+    description: "Built high-volume trading dashboard for Zürich fintech; handled 120k tx/s, cut latency 40%. Led three-month rescue of failing React/Go monolith for e-commerce client; turned 600k daily users from 2s TTI to 400ms. Designed and shipped interactive 3D experience showcasing real-time WebGL performance."
   }
 ];
 
@@ -69,11 +69,11 @@ export const skills = [
 ];
 
 export const projects = [
-  // Featured Project - Pixel Component Craft
+  // Featured Project - Interactive 3D Experience
   {
     id: 1,
-    name: "Pixel Component Craft",
-    description: "Interactive 3D factory experience showcasing real-time component assembly. Built with Spline and Three.js for performant web graphics.",
+    name: "Interactive 3D Experience",
+    description: "Real-time component assembly experience showcasing performant WebGL graphics. Built with Spline and Three.js for smooth 60fps interactions.",
     image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
     technologies: ["Spline", "Three.js", "React", "WebGL"],
     liveUrl: "https://pixel-component-craft.vercel.app/",
