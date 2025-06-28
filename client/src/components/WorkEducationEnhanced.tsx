@@ -348,7 +348,7 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
             className="
           absolute inset-0 -translate-x-full bg-gradient-to-r
           from-transparent via-white/5 to-transparent
-          group-hover:translate-x-full transition-transform duration-[900ms]
+          group-hover:translate-x-full transition-transform duration-\[900ms\]
         "
         />
 
