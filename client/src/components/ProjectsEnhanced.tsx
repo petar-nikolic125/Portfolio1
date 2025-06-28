@@ -92,13 +92,13 @@ export default function ProjectsEnhanced() {
 
   /* ───────────────────────────── ui starts here ──────────────────────────── */
   return (
-      <section className="py-[var(--section-padding)] px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
+      <section className="section-pad px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
         {/* heading */}
         <header className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-slide-in">
+          <h2 className="text-4xl md:text-5xl font-bold fg-base mb-4 animate-fade-slide-in">
             Projects
           </h2>
-          <p className="text-xl text-gray-400 animate-slide-up-fade">
+          <p className="text-xl fg-faint animate-slide-up-fade">
             Explore my work across different domains
           </p>
         </header>
@@ -108,14 +108,14 @@ export default function ProjectsEnhanced() {
           {/* search bar */}
           <div className="relative animate-pop-in">
             <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                className="absolute left-4 top-1/2 -translate-y-1/2 fg-faint"
                 size={20}
             />
             <input
                 ref={searchRef}
                 type="text"
                 placeholder="Search projects, technologies…"
-                className="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-900/60 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                className="w-full pl-12 pr-4 py-3 rounded-lg bg-[hsl(var(--bg-surface)/.6)] border border-[hsl(var(--border-color))] fg-base placeholder:fg-faint focus:outline-none focus:border-[hsl(var(--accent-from))] focus:ring-1 focus:ring-[hsl(var(--ring-color))] transition"
                 onChange={(e) =>
                     setFilters((f) => ({ ...f, search: e.target.value }))
                 }
@@ -155,12 +155,12 @@ export default function ProjectsEnhanced() {
         {/* active-filter summary */}
         {activeCount > 0 && (
             <div className="flex items-center justify-between mb-6">
-              <p className="text-sm text-gray-400">
+              <p className="text-sm fg-faint">
                 {filtered.length} / {projects.length} shown
               </p>
               <button
                   onClick={clear}
-                  className="text-sm text-indigo-400 hover:text-indigo-300 transition"
+                  className="text-sm text-[hsl(var(--accent-from))] hover:text-[hsl(var(--accent-to))] transition"
               >
                 Clear all
               </button>
@@ -172,7 +172,7 @@ export default function ProjectsEnhanced() {
           {filtered.map((p, i) => (
               <article
                   key={p.id}
-                  className="project-card group relative rounded-lg border border-gray-700 bg-gray-900/50 overflow-hidden transition hover:border-[var(--accent)]"
+                  className="project-card group relative rounded-xl border border-[hsl(var(--border-color))] bg-[hsl(var(--bg-surface)/.6)] overflow-hidden transition-all hover:border-[hsl(var(--accent-from))] hover:shadow-lg hover:shadow-[hsl(var(--black-900)/.55)]"
                   style={{ animationDelay: `${i * 60}ms` }}
               >
                 {/* image banner */}
@@ -184,13 +184,13 @@ export default function ProjectsEnhanced() {
                         className="w-full aspect-[16/9] object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
                     />
                 ) : (
-                    <div className="w-full aspect-[16/9] bg-gradient-to-br from-slate-800 to-slate-700/60" />
+                    <div className="w-full aspect-[16/9] bg-gradient-to-br from-[hsl(var(--bg-elevated))] to-[hsl(var(--bg-surface)/.6)]" />
                 )}
 
                 {/* content */}
                 <div className="p-6 space-y-4">
                   <header className="flex justify-between items-start">
-                    <h3 className="text-xl font-bold text-white group-hover:text-[var(--accent)] transition">
+                    <h3 className="text-xl font-bold fg-base group-hover:text-[hsl(var(--accent-from))] transition">
                       {p.name}
                     </h3>
                     {p.liveUrl && (
@@ -198,7 +198,7 @@ export default function ProjectsEnhanced() {
                             href={p.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-gray-400 hover:text-indigo-400 transition"
+                            className="fg-faint hover:text-[hsl(var(--accent-from))] transition"
                             title="View live"
                         >
                           <ExternalLink size={18} />
@@ -207,25 +207,29 @@ export default function ProjectsEnhanced() {
                   </header>
 
                   {p.category && (
-                      <span className="inline-block px-2.5 py-0.5 rounded-full text-xs bg-indigo-500/15 text-indigo-300">
+                      <span className="chip chip-blue">
                   {p.category}
                 </span>
                   )}
 
-                  <p className="text-gray-300 line-clamp-3">{p.description}</p>
+                  <p className="fg-subtle line-clamp-3">{p.description}</p>
 
                   {/* tech pills */}
                   <div className="flex flex-wrap gap-2">
-                    {p.technologies.slice(0, 4).map((t) => (
+                    {p.technologies.slice(0, 4).map((t, index) => {
+                      const chipColors = ['chip-blue', 'chip-lime', 'chip-amber', 'chip-fuchsia', 'chip-cyan'];
+                      const colorClass = chipColors[index % chipColors.length];
+                      return (
                         <span
                             key={t}
-                            className="text-[11px] px-2 py-1 rounded bg-gray-800/60 text-gray-400 group-hover:bg-gray-800/80 transition"
+                            className={`chip ${colorClass}`}
                         >
                     {t}
                   </span>
-                    ))}
+                      );
+                    })}
                     {p.technologies.length > 4 && (
-                        <span className="text-[11px] px-2 py-1 text-gray-500">
+                        <span className="text-[11px] px-2 py-1 fg-faint">
                     +{p.technologies.length - 4}
                   </span>
                     )}
@@ -233,7 +237,7 @@ export default function ProjectsEnhanced() {
                 </div>
 
                 {/* subtle overlay on hover */}
-                <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-transparent to-purple-600/0 group-hover:from-indigo-500/10 group-hover:to-purple-600/10 transition opacity-0 group-hover:opacity-100" />
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[hsl(var(--brand-sky)/0)] via-transparent to-[hsl(var(--brand-fuchsia)/0)] group-hover:from-[hsl(var(--brand-sky)/.08)] group-hover:to-[hsl(var(--brand-fuchsia)/.08)] transition opacity-0 group-hover:opacity-100" />
               </article>
           ))}
         </div>
@@ -241,10 +245,10 @@ export default function ProjectsEnhanced() {
         {/* empty-state */}
         {filtered.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-gray-400 mb-4">No projects match your filters.</p>
+              <p className="fg-faint mb-4">No projects match your filters.</p>
               <button
                   onClick={clear}
-                  className="text-indigo-400 hover:text-indigo-300 transition"
+                  className="text-[hsl(var(--accent-from))] hover:text-[hsl(var(--accent-to))] transition"
               >
                 Reset filters
               </button>
@@ -270,37 +274,35 @@ function FilterPanel({
   open: boolean;
   onToggle: () => void;
 }) {
-  const colorBG = color === "indigo" ? "bg-indigo-500/20" : "bg-purple-500/20";
-  const colorText =
-      color === "indigo" ? "text-indigo-300" : "text-purple-300";
+  const chipClass = color === "indigo" ? "chip-blue" : "chip-fuchsia";
+  
   return (
-      <div className="border border-gray-700 rounded-lg overflow-hidden">
+      <div className="border border-[hsl(var(--border-color))] rounded-lg overflow-hidden">
         <button
             onClick={onToggle}
-            className="w-full flex items-center justify-between p-4 bg-gray-900/40 hover:bg-gray-900/60 transition"
+            className="w-full flex items-center justify-between p-4 bg-[hsl(var(--bg-surface)/.4)] hover:bg-[hsl(var(--bg-surface)/.6)] transition"
         >
-        <span className="flex items-center gap-2 text-white font-medium">
-          <Filter size={18} className="text-gray-400" />
+        <span className="flex items-center gap-2 fg-base font-medium">
+          <Filter size={18} className="fg-faint" />
           {label}
           {count > 0 && (
-              <span
-                  className={`px-2 py-0.5 rounded-full text-xs ${colorBG} ${colorText}`}
-              >
+              <span className={`chip ${chipClass}`}>
               {count}
             </span>
           )}
         </span>
           <ChevronDown
               size={18}
-              className={`text-gray-400 transition-transform ${
+              className={`fg-faint transition-transform ${
                   open ? "rotate-180" : ""
               }`}
           />
         </button>
         <div
-            className={`transition-all duration-300 ${
+            className={`transition-all ${
                 open ? "max-h-80" : "max-h-0"
             } overflow-hidden`}
+            style={{ transitionDuration: 'var(--dur-mid)' }}
         >
           {children}
         </div>
@@ -325,9 +327,9 @@ function CheckboxGrid({
                   type="checkbox"
                   checked={checked.includes(opt)}
                   onChange={() => onChange(opt)}
-                  className="w-4 h-4 bg-gray-800 border-gray-600 text-indigo-500 rounded focus:ring-indigo-500"
+                  className="w-4 h-4 bg-[hsl(var(--bg-surface))] border-[hsl(var(--border-color))] text-[hsl(var(--accent-from))] rounded focus:ring-[hsl(var(--ring-color))]"
               />
-              <span className="text-sm text-gray-400">{opt}</span>
+              <span className="text-sm fg-faint">{opt}</span>
             </label>
         ))}
       </div>

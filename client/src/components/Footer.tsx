@@ -3,12 +3,12 @@ import { SiGithub, SiLinkedin, SiInstagram } from "react-icons/si";
 
 export default function Footer() {
   return (
-    <footer className="py-16 px-4 sm:px-6 lg:px-8 border-t border-border">
-      <div className="max-w-4xl mx-auto text-center">
+    <footer className="section-pad px-4 sm:px-6 lg:px-8 border-t border-[hsl(var(--border-color))] max-w-7xl mx-auto">
+      <div className="w-full text-center">
         {/* Personal Monogram */}
         <div className="mb-6">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-muted rounded-full border border-border shadow-inner">
-            <span className="font-serif font-bold text-xl text-foreground">PN</span>
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-[hsl(var(--bg-surface))] rounded-full border border-[hsl(var(--border-color))] shadow-inner">
+            <span className="font-serif font-bold text-xl fg-base">PN</span>
           </div>
         </div>
         
@@ -16,28 +16,28 @@ export default function Footer() {
         <div className="flex justify-center space-x-6 mb-6">
           <a 
             href={personalInfo.social.github} 
-            className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition-all duration-300"
+            className="social-link"
             aria-label="GitHub"
           >
             <SiGithub className="w-5 h-5" />
           </a>
           <a 
             href={personalInfo.social.linkedin} 
-            className="text-muted-foreground hover:text-accent hover:-translate-y-0.5 transition-all duration-300"
+            className="social-link"
             aria-label="LinkedIn"
           >
             <SiLinkedin className="w-5 h-5" />
           </a>
           <a 
             href={personalInfo.social.instagram} 
-            className="text-gray-500 hover:text-navy hover:-translate-y-0.5 transition-all duration-300"
+            className="social-link"
             aria-label="Instagram"
           >
             <SiInstagram className="w-5 h-5" />
           </a>
           <a 
             href={`mailto:${personalInfo.social.email}`} 
-            className="text-gray-500 hover:text-navy hover:-translate-y-0.5 transition-all duration-300"
+            className="social-link"
             aria-label="Email"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -48,7 +48,7 @@ export default function Footer() {
         </div>
         
         {/* Copyright */}
-        <p className="text-xs text-gray-500 uppercase tracking-widest font-medium">
+        <p className="text-xs fg-faint uppercase tracking-widest font-medium">
           © 2024 Petar Nikolić. All rights reserved.
         </p>
       </div>

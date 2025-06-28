@@ -1,0 +1,73 @@
+Build a single, buttery-smooth experience where every pixel belongs to the same visual universe. No stray tints, no clashing backgrounds, zero “close-enough” shades. When a visitor scrolls from the hero to Work → Education → Skills → Projects, it should feel like one continuous cinematic shot.
+
+1. Canonical colour system
+Only pull colour values from index.css custom properties (--background, --accent, --navy, chips, etc.) or Tailwind tokens extended in tailwind.config.ts.
+
+Never hard-code RGB/HEX inside components—use the utility classes that map to those variables (bg-background, text-sky-300, chip-fuchsia, …).
+
+Verify dark-mode tokens produce identical contrast across all five TSX sections.
+
+Token	Primary usage
+--background / bg-background	full-page backdrop *
+--card & --card-foreground	timeline cards, project cards
+--accent	borders, hovers, metric chips
+Gradient sources (from-sky-500 → to-fuchsia-500)	toggles, buttons
+
+⭐ Tip: declare a @apply bg-[color:rgb(var(--background)/<alpha>)] helper if you need translucency.
+
+2. Component contract
+The five TSX files—Hero.tsx, WorkEducationEnhanced.tsx, Skills.tsx, ProjectsEnhanced.tsx, Footer.tsx—must:
+
+Mount into the same max-width container (max-w-7xl or 6xl) and inherit .section-padding.
+
+Share the same gradient ring/mesh backdrop utilities (re-use <Backdrop /> or extract to a common <SceneGlow />).
+
+Apply identical shadow softness (shadow-lg/20), border-radius (rounded-xl, --radius), and inner padding (p-6, md:p-8) on all card-like surfaces.
+
+Use the chip palette utilities (chip-blue, chip-amber, …) for every metric/skill tag—zero ad-hoc pills.
+
+Trigger entry animations via .animate-card, .animate-fade-slide-in, or .work-list rules—scroll observers already shipped in /lib/animations.ts.
+
+3. Animation choreography
+Stagger lists with delay-[X] utilities or inline style={{animationDelay:"…" }}—but keep the easing + durations consistent (var(--spring) / var(--smooth)).
+
+Use the pre-defined keyframes:
+
+slide-up-fade → content sections
+
+pop-in → skills grid items
+
+badge-pulse → ribbons (“LIVE”, “HOT”, “NEW”)
+
+border-cycle + text-flicker → education cards on hover
+
+Honour reduced-motion (prefers-reduced-motion)—already handled in CSS; just avoid JS-only animations.
+
+4. Accessibility & polish
+Text contrast ≥ AA (Tailwind foreground tokens handle this; double-check chips & links).
+
+Focus rings: rely on Tailwind’s focus-visible:ring-2 ring-offset-2 ring-[--accent].
+
+Keyboard nav: Work/Education toggle must be focusable (role="tab" / aria-selected).
+
+All SVG/emoji badges should have alt="" (decorative) or sr-only labels if they convey meaning.
+
+5. Quick QA checklist
+Path	What to check	Expected
+/	Dark-mode toggle	seamless palette swap
+Scroll hero → footer	Mesh/ring backdrop alignment	no sudden colour jump
+Work ↔ Education pill	Gradient knob & text active state	matches accent
+Chip variants	Blue, Lime, Amber, Fuchsia, Cyan	same border-radius, size
+Mobile (≤ 360 px)	Timeline left gutter	collapes to pl-12 correctly
+
+6. Deliverable
+No inline styles except dynamic delays.
+
+No duplicated CSS — everything must pull from index.css.
+
+Merge request title: feat/ui: cohesive palette & animation pass.
+
+Include before/after screenshots or a Loom for sign-off.
+
+Bottom line
+Think one brand, one mood, one motion system. When you’re done, the site should look like it was art-directed in a single Figma page — fluent gradients, glowing chips, and velvety dark surfaces that read professional at first glance and mesmerising on closer look.

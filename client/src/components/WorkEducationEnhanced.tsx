@@ -257,13 +257,13 @@ export default function WorkEducationEnhanced() {
   }, [tab]);
 
   return (
-      <section className="relative max-w-6xl mx-auto px-4 md:px-8 lg:px-16 py-section">
+      <section className="relative max-w-7xl mx-auto px-4 md:px-8 lg:px-16 section-pad">
         <Backdrop />
 
         <HeaderToggle view={tab} setView={setTab} />
 
-        <div className="relative mt-16 rounded-xl border border-white/10 bg-white/5 backdrop-blur">
-          <span className="absolute left-[88px] top-0 bottom-0 w-px bg-white/20 rounded-full" />
+        <div className="relative mt-16 rounded-xl border border-[hsl(var(--border-color))] bg-[hsl(var(--bg-surface)/.6)] backdrop-blur">
+          <span className="timeline-spine" />
 
           <ul className="py-6">
             {data.map((item, i) => (
@@ -295,7 +295,7 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
 
         <div>
           <time className="text-xs fg-faint">{item.period}</time>
-          <h3 className="font-semibold fg-base group-hover:text-sky-400">
+          <h3 className="font-semibold fg-base group-hover:text-[hsl(var(--accent-from))]">
             {item.heading}
           </h3>
           <p className="text-sm fg-subtle">{item.subHeading}</p>
@@ -316,7 +316,7 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
                 {item.tech.map((t) => (
                     <span
                         key={t}
-                        className="rounded bg-muted/20 px-2 py-0.5 text-[10px] uppercase tracking-wide fg-faint"
+                        className="rounded bg-[hsl(var(--bg-surface)/.4)] px-2 py-0.5 text-[10px] uppercase tracking-wide fg-faint"
                     >
                 {t}
               </span>
@@ -329,7 +329,7 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
                   href={item.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm inline-flex items-center gap-1 text-sky-400 hover:text-sky-300 mt-1"
+                  className="text-sm inline-flex items-center gap-1 text-[hsl(var(--accent-from))] hover:text-[hsl(var(--accent-to))] mt-1"
               >
                 <ExternalLink size={14} />
                 Live Site
@@ -341,10 +341,10 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
             <span
                 className={`absolute -top-2 -right-2 rounded px-2 py-[1px] text-[10px] font-bold ${
                     item.ribbon === "LIVE"
-                        ? "bg-emerald-500 text-white"
+                        ? "ribbon-live"
                         : item.ribbon === "HOT"
-                            ? "bg-amber-500 text-white"
-                            : "bg-fuchsia-500 text-white"
+                            ? "ribbon-hot"
+                            : "ribbon-new"
                 }`}
             >
           {item.ribbon}
@@ -366,7 +366,7 @@ function EduCard({ item, index }: { item: EduItem; index: number }) {
 
         <div>
           <time className="text-xs fg-faint">{item.period}</time>
-          <h3 className="font-semibold fg-base group-hover:text-purple-400">
+          <h3 className="font-semibold fg-base group-hover:text-[hsl(var(--accent-to))]">
             {item.heading}
           </h3>
           <p className="text-sm fg-subtle">{item.subHeading}</p>
@@ -385,7 +385,9 @@ function EduCard({ item, index }: { item: EduItem; index: number }) {
           {item.docUrl && (
               <a
                   href={item.docUrl}
-                  className="text-sm inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 mt-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm inline-flex items-center gap-1 text-[hsl(var(--accent-to))] hover:text-[hsl(var(--accent-from))] mt-1"
               >
                 <Download size={14} />
                 PDF
@@ -394,7 +396,7 @@ function EduCard({ item, index }: { item: EduItem; index: number }) {
         </div>
 
         {item.ribbon && (
-            <span className="absolute -top-2 -right-2 rounded px-2 py-[1px] text-[10px] font-bold bg-fuchsia-500 text-white">
+            <span className="ribbon-new">
           {item.ribbon}
         </span>
         )}
@@ -412,9 +414,9 @@ function HeaderToggle({
 }) {
   return (
       <div className="flex justify-center">
-        <div className="relative bg-neutral-900/60 border border-neutral-800 rounded-full p-1 backdrop-blur">
+        <div className="toggle-wrap">
           <div
-              className={`absolute inset-y-1 rounded-full bg-gradient-to-r from-sky-500 to-fuchsia-500 transition-all duration-300 ${
+              className={`toggle-thumb ${
                   view === "work" ? "left-1 right-1/2" : "left-1/2 right-1"
               }`}
           />
@@ -422,20 +424,22 @@ function HeaderToggle({
           <button
               className={`relative z-10 px-10 py-2 font-medium ${
                   view === "work"
-                      ? "text-white"
-                      : "text-gray-400 hover:text-gray-200"
-              } transition`}
+                      ? "fg-base"
+                      : "fg-faint hover:fg-subtle"
+              } transition-colors`}
               onClick={() => setView("work")}
+              style={{ transitionDuration: 'var(--dur-fast)' }}
           >
             Work
           </button>
           <button
               className={`relative z-10 px-10 py-2 font-medium ${
                   view === "edu"
-                      ? "text-white"
-                      : "text-gray-400 hover:text-gray-200"
-              } transition`}
+                      ? "fg-base"
+                      : "fg-faint hover:fg-subtle"
+              } transition-colors`}
               onClick={() => setView("edu")}
+              style={{ transitionDuration: 'var(--dur-fast)' }}
           >
             Education
           </button>
@@ -448,8 +452,8 @@ function HeaderToggle({
 function Backdrop() {
   return (
       <>
-        <div className="pointer-events-none absolute -z-10 left-1/2 -translate-x-1/2 -top-52 w-[900px] h-[900px] rounded-full bg-sky-500/5 blur-[160px]" />
-        <div className="pointer-events-none absolute -z-10 right-0 top-1/3 w-[600px] h-[600px] -rotate-45 bg-gradient-to-b from-fuchsia-500/5 via-transparent to-sky-500/0 blur-[160px]" />
+        <div className="pointer-events-none absolute -z-10 left-1/2 -translate-x-1/2 -top-52 w-[900px] h-[900px] rounded-full bg-[hsl(var(--brand-sky)/.05)] blur-[160px]" />
+        <div className="pointer-events-none absolute -z-10 right-0 top-1/3 w-[600px] h-[600px] -rotate-45 bg-gradient-to-b from-[hsl(var(--brand-fuchsia)/.05)] via-transparent to-[hsl(var(--brand-sky)/0)] blur-[160px]" />
       </>
   );
 }

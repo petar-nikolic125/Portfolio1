@@ -149,7 +149,8 @@
   /*----------- Buttons ---------------------------------------*/
   .btn {
     @apply inline-flex items-center gap-2 rounded-lg px-6 py-2
-    font-medium transition-colors duration-[var(--dur-mid)];
+    font-medium transition-colors;
+    transition-duration: var(--dur-mid);
   }
   .btn-primary {
     background: linear-gradient(90deg,
@@ -173,7 +174,8 @@
     @apply absolute inset-y-1 rounded-full
     bg-gradient-to-r from-[hsl(var(--accent-from))]
     to-[hsl(var(--accent-to))]
-    transition-all duration-[var(--dur-mid)];
+    transition-all;
+    transition-duration: var(--dur-mid);
   }
 
   /*----------- Timeline spine & card -------------------------*/

@@ -24,14 +24,14 @@ export default function Skills() {
   }, [isVisible]);
 
   return (
-    <section ref={sectionRef} className="section-padding px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="font-serif font-bold text-4xl text-foreground text-center mb-16 animate-mask-reveal">Skills</h2>
+    <section ref={sectionRef} className="section-pad px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="w-full">
+        <h2 className="font-serif font-bold text-4xl fg-base text-center mb-16 animate-mask-reveal">Skills</h2>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {Object.entries(skillsByCategory).map(([category, skills], categoryIdx) => (
             <div key={category} className="text-center">
-              <h3 className="font-sans font-semibold text-lg text-foreground mb-4 tracking-wide">
+              <h3 className="font-sans font-semibold text-lg fg-base mb-4 tracking-wide">
                 {category}
               </h3>
               <div className="flex flex-wrap justify-center gap-2">
@@ -40,11 +40,14 @@ export default function Skills() {
                   const angle = (totalIdx / Object.values(skillsByCategory).flat().length) * 360;
                   const delay = totalIdx * 20;
                   
+                  // Rotate through chip colors
+                  const chipColors = ['chip-blue', 'chip-lime', 'chip-amber', 'chip-fuchsia', 'chip-cyan'];
+                  const colorClass = chipColors[totalIdx % chipColors.length];
+                  
                   return (
-                    <Badge
+                    <span
                       key={skill}
-                      variant="secondary"
-                      className={`px-3 py-1.5 bg-gray-800 text-gray-300 rounded border border-gray-700 text-xs font-medium hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gray-900/20 transition-all duration-300 cursor-default ${
+                      className={`chip ${colorClass} hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[hsl(var(--black-900)/.55)] transition-all cursor-default ${
                         isVisible ? 'animate-radial-burst' : 'opacity-0'
                       }`}
                       style={{
@@ -53,7 +56,7 @@ export default function Skills() {
                       } as React.CSSProperties}
                     >
                       {skill}
-                    </Badge>
+                    </span>
                   );
                 })}
               </div>
