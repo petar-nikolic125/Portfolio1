@@ -286,16 +286,22 @@ export default function WorkEducationEnhanced() {
 function WorkCard({ item, index }: { item: WorkItem; index: number }) {
   return (
       <li
-          className="timeline-card relative flex pl-[7.5rem] pr-6 py-5 group"
+          className="timeline-card relative flex pl-[7.5rem] pr-6 py-5 group hover-lift overflow-hidden"
           style={{ animationDelay: `${index * 90}ms` }}
       >
-        <div className="absolute left-6 top-6">
+        {/* Gradient sweep on hover */}
+        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-[hsl(var(--accent-from)/.05)] to-transparent 
+                       -translate-x-full group-hover:translate-x-full transition-transform duration-1500" />
+        
+        <div className="absolute left-6 top-6 group-hover:scale-110 transition-transform duration-500">
           <Badge logo={item.logo} emoji={item.emoji} type="work" />
         </div>
 
-        <div>
-          <time className="text-xs fg-faint">{item.period}</time>
-          <h3 className="font-semibold fg-base group-hover:text-[hsl(var(--accent-from))]">
+        <div className="relative">
+          <time className="text-xs fg-faint group-hover:text-[hsl(var(--accent-from)/.8)] transition-colors duration-300">
+            {item.period}
+          </time>
+          <h3 className="font-semibold fg-base group-hover:text-[hsl(var(--accent-from))] transition-colors duration-300">
             {item.heading}
           </h3>
           <p className="text-sm fg-subtle">{item.subHeading}</p>
@@ -413,35 +419,42 @@ function HeaderToggle({
   setView: (v: "work" | "edu") => void;
 }) {
   return (
-      <div className="flex justify-center">
-        <div className="toggle-wrap">
+      <div className="flex justify-center fade-in-up">
+        <div className="toggle-wrap hover-lift relative overflow-hidden">
           <div
-              className={`toggle-thumb ${
+              className={`toggle-thumb backdrop-blur-md ${
                   view === "work" ? "left-1 right-1/2" : "left-1/2 right-1"
               }`}
+              style={{ transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)' }}
           />
+          
+          {/* Shimmer effect */}
+          <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent 
+                         animate-[shimmer_3s_ease-in-out_infinite]" />
 
           <button
-              className={`relative z-10 px-10 py-2 font-medium ${
+              className={`relative z-10 px-10 py-2 font-medium transition-all duration-300 group ${
                   view === "work"
-                      ? "fg-base"
+                      ? "fg-base scale-105"
                       : "fg-faint hover:fg-subtle"
-              } transition-colors`}
+              }`}
               onClick={() => setView("work")}
-              style={{ transitionDuration: 'var(--dur-fast)' }}
           >
-            Work
+            <span className={`inline-block transition-transform duration-500 ${
+              view === "work" ? "scale-110" : "group-hover:scale-110"
+            }`}>Work</span>
           </button>
           <button
-              className={`relative z-10 px-10 py-2 font-medium ${
+              className={`relative z-10 px-10 py-2 font-medium transition-all duration-300 group ${
                   view === "edu"
-                      ? "fg-base"
+                      ? "fg-base scale-105"
                       : "fg-faint hover:fg-subtle"
-              } transition-colors`}
+              }`}
               onClick={() => setView("edu")}
-              style={{ transitionDuration: 'var(--dur-fast)' }}
           >
-            Education
+            <span className={`inline-block transition-transform duration-500 ${
+              view === "edu" ? "scale-110" : "group-hover:scale-110"
+            }`}>Education</span>
           </button>
         </div>
       </div>

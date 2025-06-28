@@ -117,22 +117,128 @@
   2 · KEYFRAMES
 =============================================================*/
 @layer utilities {
-  /* ---------------------------------- Entrances */
-  @keyframes fade-up     { from {opacity:0; transform:translateY(12px)}
-    to   {opacity:1; transform:translateY(0)} }
-  @keyframes fade-right  { from {opacity:0; transform:translateX(-12px)}
-    to   {opacity:1; transform:translateX(0)} }
-  @keyframes scale-pop   { 0% {opacity:0; transform:scale(.8)}
-    60% {transform:scale(1.05)}
-    100%{opacity:1; transform:scale(1)} }
+  /* ---------------------------------- Premium Entrances */
+  @keyframes fade-up { 
+    from {
+      opacity:0; 
+      transform:translateY(30px) scale(0.98);
+      filter: blur(8px);
+    }
+    to {
+      opacity:1; 
+      transform:translateY(0) scale(1);
+      filter: blur(0);
+    } 
+  }
+  
+  @keyframes fade-right { 
+    from {
+      opacity:0; 
+      transform:translateX(-30px) rotateY(-10deg);
+      perspective: 1000px;
+    }
+    to {
+      opacity:1; 
+      transform:translateX(0) rotateY(0);
+    } 
+  }
+  
+  @keyframes scale-pop { 
+    0% {
+      opacity:0; 
+      transform:scale(.85) rotateZ(-2deg);
+      filter: blur(4px);
+    }
+    60% {
+      transform:scale(1.02) rotateZ(0.5deg);
+      filter: blur(0);
+    }
+    100%{
+      opacity:1; 
+      transform:scale(1) rotateZ(0);
+    } 
+  }
 
-  /* ---------------------------------- Flourishes */
-  @keyframes wiggle         { 0%,100%{rotate:0deg} 25%{rotate:-5deg} 75%{rotate:5deg}}
-  @keyframes pulse-glow     { 0%{box-shadow:0 0 0 0 hsl(var(--accent-from)/.40)}
-    70%{box-shadow:0 0 0 16px hsl(var(--accent-from)/0)} }
-  @keyframes hue-rotate     { 0%{filter:hue-rotate(0deg)} 100%{filter:hue-rotate(360deg)} }
-  @keyframes grain          { 0%,100%{transform:translate(0,0)}
-    50% {transform:translate(-6%,8%)} }
+  /* ---------------------------------- Premium Flourishes */
+  @keyframes wiggle { 
+    0%,100%{rotate:0deg; transform: translateY(0)} 
+    25%{rotate:-3deg; transform: translateY(-2px)} 
+    75%{rotate:3deg; transform: translateY(2px)}
+  }
+  
+  @keyframes pulse-glow { 
+    0%{
+      box-shadow:0 0 0 0 hsl(var(--accent-from)/.40),
+                 0 0 20px hsl(var(--accent-from)/.20);
+    }
+    70%{
+      box-shadow:0 0 0 20px hsl(var(--accent-from)/0),
+                 0 0 40px hsl(var(--accent-from)/0);
+    } 
+  }
+  
+  @keyframes hue-rotate { 
+    0%{filter:hue-rotate(0deg) brightness(1)} 
+    50%{filter:hue-rotate(180deg) brightness(1.1)}
+    100%{filter:hue-rotate(360deg) brightness(1)} 
+  }
+  
+  @keyframes grain { 
+    0%,100%{transform:translate(0,0) scale(1)}
+    50% {transform:translate(-6%,8%) scale(1.05)} 
+  }
+  
+  /* ---------------------------------- Professional Motion */
+  @keyframes shimmer {
+    from {
+      background-position: -200% center;
+    }
+    to {
+      background-position: 200% center;
+    }
+  }
+  
+  @keyframes float-smooth {
+    0%, 100% { 
+      transform: translateY(0px) translateX(0px) rotateZ(0deg);
+    }
+    33% { 
+      transform: translateY(-25px) translateX(10px) rotateZ(1deg);
+    }
+    66% { 
+      transform: translateY(15px) translateX(-5px) rotateZ(-1deg);
+    }
+  }
+  
+  @keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  @keyframes slide-in-stagger {
+    from {
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+      filter: blur(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+  
+  @keyframes text-glow {
+    0%, 100% {
+      text-shadow: 0 0 10px hsl(var(--accent-from)/.3),
+                   0 0 20px hsl(var(--accent-from)/.2);
+    }
+    50% {
+      text-shadow: 0 0 20px hsl(var(--accent-from)/.5),
+                   0 0 40px hsl(var(--accent-from)/.3);
+    }
+  }
 
   /* ---------------------------------- Count-up numeric (custom prop driven) */
   @keyframes count-up {
@@ -220,7 +326,7 @@
 }
 
 /*=============================================================
-  4 · UTILITIES  (extra helpers + colour chip variants)
+  4 · UTILITIES  (Premium helpers + chip variants)
 =============================================================*/
 @layer utilities {
   /* Brightness shortcuts */
@@ -228,26 +334,98 @@
   .fg-subtle { color: hsl(var(--fg-subtle)); }
   .fg-faint  { color: hsl(var(--fg-faint)); }
 
-  /* Chip colour variants */
-  .chip-blue    { --chip-bg: var(--chip-blue-bg);    --chip-fg: var(--chip-blue-fg); }
-  .chip-lime    { --chip-bg: var(--chip-lime-bg);    --chip-fg: var(--chip-lime-fg); }
-  .chip-amber   { --chip-bg: var(--chip-amber-bg);   --chip-fg: var(--chip-amber-fg); }
-  .chip-fuchsia { --chip-bg: var(--chip-fuchsia-bg); --chip-fg: var(--chip-fuchsia-fg); }
-  .chip-cyan    { --chip-bg: var(--chip-cyan-bg);    --chip-fg: var(--chip-cyan-fg); }
+  /* Chip colour variants with premium hover */
+  .chip-blue    { 
+    --chip-bg: var(--chip-blue-bg);    
+    --chip-fg: var(--chip-blue-fg);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .chip-lime    { 
+    --chip-bg: var(--chip-lime-bg);    
+    --chip-fg: var(--chip-lime-fg);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .chip-amber   { 
+    --chip-bg: var(--chip-amber-bg);   
+    --chip-fg: var(--chip-amber-fg);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .chip-fuchsia { 
+    --chip-bg: var(--chip-fuchsia-bg); 
+    --chip-fg: var(--chip-fuchsia-fg);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .chip-cyan    { 
+    --chip-bg: var(--chip-cyan-bg);    
+    --chip-fg: var(--chip-cyan-fg);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
 
-  /* In-view entrance helpers */
-  .fade-in-up       { animation: fade-up   .45s var(--spring) forwards; }
-  .fade-in-right    { animation: fade-right .45s var(--spring) forwards; }
-  .scale-pop        { animation: scale-pop .45s var(--spring) forwards; }
-  .delay-75         { animation-delay:.075s; }
-  .delay-150        { animation-delay:.150s; }
-  .delay-225        { animation-delay:.225s; }
-  .delay-300        { animation-delay:.300s; }
+  /* Premium entrance animations */
+  .fade-in-up       { animation: fade-up   0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+  .fade-in-right    { animation: fade-right 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+  .scale-pop        { animation: scale-pop 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards; }
+  .slide-stagger    { animation: slide-in-stagger 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+  
+  /* Stagger delays */
+  .delay-75         { animation-delay: 75ms; }
+  .delay-150        { animation-delay: 150ms; }
+  .delay-225        { animation-delay: 225ms; }
+  .delay-300        { animation-delay: 300ms; }
+  .delay-375        { animation-delay: 375ms; }
+  .delay-450        { animation-delay: 450ms; }
 
-  /* Badge ribbons */
-  .ribbon-live  { @apply bg-emerald-500 text-white text-[10px] px-2 py-[2px] rounded font-bold; }
-  .ribbon-hot   { @apply bg-amber-500   text-white text-[10px] px-2 py-[2px] rounded font-bold; }
-  .ribbon-new   { @apply bg-fuchsia-500 text-white text-[10px] px-2 py-[2px] rounded font-bold; }
+  /* Premium hover states */
+  .hover-lift {
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Badge ribbons with animation */
+  .ribbon-live  { 
+    @apply bg-emerald-500 text-white text-[10px] px-2 py-[2px] rounded font-bold;
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .ribbon-hot   { 
+    @apply bg-amber-500 text-white text-[10px] px-2 py-[2px] rounded font-bold;
+    animation: wiggle 2s ease-in-out infinite;
+  }
+  .ribbon-new   { 
+    @apply bg-fuchsia-500 text-white text-[10px] px-2 py-[2px] rounded font-bold;
+    animation: scale-pop 3s cubic-bezier(0.68, -0.6, 0.32, 1.6) infinite;
+  }
+
+  /* Professional shimmer effect */
+  .shimmer-text {
+    background: linear-gradient(
+      120deg,
+      hsl(var(--fg-faint)) 30%,
+      hsl(var(--fg)) 38%,
+      hsl(var(--fg)) 40%,
+      hsl(var(--fg-faint)) 48%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s ease-out infinite;
+  }
+
+  /* Smooth gradient animation */
+  .gradient-animate {
+    background: linear-gradient(
+      -45deg,
+      hsl(var(--brand-sky)),
+      hsl(var(--brand-fuchsia)),
+      hsl(var(--accent-from)),
+      hsl(var(--accent-to))
+    );
+    background-size: 400% 400%;
+    animation: gradient-flow 8s ease infinite;
+  }
 
   /* Grain overlay for subtle film-noise */
   /* --- 2. Grain overlay pseudo-element (extra brace removed + valid URL) --- */

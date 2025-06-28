@@ -95,10 +95,10 @@ export default function ProjectsEnhanced() {
       <section className="section-pad px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
         {/* heading */}
         <header className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold fg-base mb-4 animate-fade-slide-in">
-            Projects
+          <h2 className="text-4xl md:text-5xl font-bold fg-base mb-4 fade-in-up">
+            <span className="shimmer-text">Projects</span>
           </h2>
-          <p className="text-xl fg-faint animate-slide-up-fade">
+          <p className="text-xl fg-faint fade-in-up delay-150">
             Explore my work across different domains
           </p>
         </header>
@@ -106,16 +106,18 @@ export default function ProjectsEnhanced() {
         {/* search + filter */}
         <div className="mb-10 space-y-4">
           {/* search bar */}
-          <div className="relative animate-pop-in">
+          <div className="relative fade-in-up delay-225 group">
             <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 fg-faint"
+                className="absolute left-4 top-1/2 -translate-y-1/2 fg-faint group-focus-within:text-[hsl(var(--accent-from))] transition-colors duration-300"
                 size={20}
             />
             <input
                 ref={searchRef}
                 type="text"
                 placeholder="Search projects, technologies…"
-                className="w-full pl-12 pr-4 py-3 rounded-lg bg-[hsl(var(--bg-surface)/.6)] border border-[hsl(var(--border-color))] fg-base placeholder:fg-faint focus:outline-none focus:border-[hsl(var(--accent-from))] focus:ring-1 focus:ring-[hsl(var(--ring-color))] transition"
+                className="w-full pl-12 pr-4 py-3 rounded-lg bg-[hsl(var(--bg-surface)/.6)] border border-[hsl(var(--border-color))] fg-base placeholder:fg-faint 
+                         focus:outline-none focus:border-[hsl(var(--accent-from))] focus:ring-2 focus:ring-[hsl(var(--ring-color))] 
+                         focus:bg-[hsl(var(--bg-surface)/.8)] transition-all duration-300 hover-lift"
                 onChange={(e) =>
                     setFilters((f) => ({ ...f, search: e.target.value }))
                 }
@@ -172,25 +174,40 @@ export default function ProjectsEnhanced() {
           {filtered.map((p, i) => (
               <article
                   key={p.id}
-                  className="project-card group relative rounded-xl border border-[hsl(var(--border-color))] bg-[hsl(var(--bg-surface)/.6)] overflow-hidden transition-all hover:border-[hsl(var(--accent-from))] hover:shadow-lg hover:shadow-[hsl(var(--black-900)/.55)]"
+                  className="project-card group relative rounded-xl border border-[hsl(var(--border-color))] bg-[hsl(var(--bg-surface)/.6)] 
+                           overflow-hidden transition-all duration-500 hover-lift
+                           hover:border-[hsl(var(--accent-from))] hover:shadow-2xl hover:shadow-[hsl(var(--black-900)/.55)]"
                   style={{ animationDelay: `${i * 60}ms` }}
               >
-                {/* image banner */}
-                {p.image ? (
-                    <img
-                        src={p.image}
-                        alt={p.name}
-                        loading="lazy"
-                        className="w-full aspect-[16/9] object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
-                    />
-                ) : (
-                    <div className="w-full aspect-[16/9] bg-gradient-to-br from-[hsl(var(--bg-elevated))] to-[hsl(var(--bg-surface)/.6)]" />
-                )}
+                {/* Premium hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--accent-from)/.15)] to-transparent opacity-0 
+                             group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10" />
+                
+                {/* image banner with zoom effect */}
+                <div className="relative overflow-hidden">
+                  {p.image ? (
+                      <img
+                          src={p.image}
+                          alt={p.name}
+                          loading="lazy"
+                          className="w-full aspect-[16/9] object-cover object-center 
+                                   transform transition-all duration-700 
+                                   group-hover:scale-110 group-hover:rotate-1"
+                      />
+                  ) : (
+                      <div className="w-full aspect-[16/9] bg-gradient-to-br from-[hsl(var(--bg-elevated))] to-[hsl(var(--bg-surface)/.6)] 
+                                    relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent 
+                                      -translate-x-full group-hover:translate-x-full transition-transform duration-1500" />
+                      </div>
+                  )}
+                </div>
 
                 {/* content */}
-                <div className="p-6 space-y-4">
+                <div className="p-6 space-y-4 relative z-20">
                   <header className="flex justify-between items-start">
-                    <h3 className="text-xl font-bold fg-base group-hover:text-[hsl(var(--accent-from))] transition">
+                    <h3 className="text-xl font-bold fg-base group-hover:text-[hsl(var(--accent-from))] 
+                               transition-all duration-300 group-hover:translate-x-1">
                       {p.name}
                     </h3>
                     {p.liveUrl && (
@@ -198,7 +215,8 @@ export default function ProjectsEnhanced() {
                             href={p.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="fg-faint hover:text-[hsl(var(--accent-from))] transition"
+                            className="fg-faint hover:text-[hsl(var(--accent-from))] transition-all duration-300
+                                     hover:scale-110 hover:rotate-12"
                             title="View live"
                         >
                           <ExternalLink size={18} />
@@ -207,14 +225,16 @@ export default function ProjectsEnhanced() {
                   </header>
 
                   {p.category && (
-                      <span className="chip chip-blue">
-                  {p.category}
-                </span>
+                      <span className="chip chip-blue inline-block hover:scale-105 transition-transform duration-300">
+                        {p.category}
+                      </span>
                   )}
 
-                  <p className="fg-subtle line-clamp-3">{p.description}</p>
+                  <p className="fg-subtle line-clamp-3 group-hover:fg-base transition-colors duration-500">
+                    {p.description}
+                  </p>
 
-                  {/* tech pills */}
+                  {/* tech pills with stagger animation */}
                   <div className="flex flex-wrap gap-2">
                     {p.technologies.slice(0, 4).map((t, index) => {
                       const chipColors = ['chip-blue', 'chip-lime', 'chip-amber', 'chip-fuchsia', 'chip-cyan'];
