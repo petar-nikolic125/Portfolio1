@@ -8,6 +8,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove snap scrolling for continuous feel */
+body {
+  overflow-x: hidden;
+}
+
 /*=============================================================
   1 · DESIGN TOKENS – CSS variables for light & dark palettes
 =============================================================*/

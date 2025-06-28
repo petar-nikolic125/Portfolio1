@@ -92,7 +92,7 @@ export default function ProjectsEnhanced() {
 
   /* ───────────────────────────── ui starts here ──────────────────────────── */
   return (
-      <section className="section-pad px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
+      <section className="py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
         {/* heading */}
         <header className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold fg-base mb-4 fade-in-up">

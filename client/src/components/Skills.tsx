@@ -181,7 +181,7 @@ export default function Skills() {
   return (
       <section
           ref={sectionRef}
-          className="section-pad py-20 lg:py-24 px-6 md:px-10 lg:px-16
+          className="py-12 md:py-16 lg:py-20 px-6 md:px-10 lg:px-16
                  max-w-screen-xl mx-auto"
       >
         <h2 className="text-center text-4xl md:text-5xl font-serif font-bold

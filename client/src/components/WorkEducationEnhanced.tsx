@@ -270,7 +270,7 @@ function MetricChip({ label, delay }: { label: string; delay: number }) {
           ref={ref}
           style={{ animationDelay: `${delay}ms` }}
           className="
-        bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
+        bg-gradient-to-r from-blue-500 to-cyan-500
         text-white rounded-full px-3 py-0.5 text-[10px] font-semibold
         shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105
       "
@@ -297,7 +297,7 @@ export default function WorkEducationEnhanced() {
   return (
       <section
           id="experience"
-          className="relative mx-auto section-pad max-w-6xl px-4 md:px-8 lg:px-16"
+          className="relative mx-auto py-12 md:py-16 lg:py-20 max-w-6xl px-4 md:px-8 lg:px-16"
       >
         <Backdrop />
         <Toggle tab={tab} setTab={setTab} />
@@ -318,15 +318,13 @@ export default function WorkEducationEnhanced() {
           "
         />
           <ul className="space-y-2 py-8">
-            {data.map((item, i) => (
-                <Fragment key={item.id}>
-                  {item.type === 'work' ? (
-                      <WorkCard item={item} index={i} />
-                  ) : (
-                      <EduCard item={item} index={i} />
-                  )}
-                </Fragment>
-            ))}
+            {data.map((item, i) => 
+              item.type === 'work' ? (
+                <WorkCard key={item.id} item={item} index={i} />
+              ) : (
+                <EduCard key={item.id} item={item} index={i} />
+              )
+            )}
           </ul>
         </div>
       </section>
@@ -401,7 +399,7 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
                   href={item.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-1 inline-flex items-center gap-1 text-sky-400 hover:text-fuchsia-400 text-xs"
+                  className="mt-1 inline-flex items-center gap-1 text-sky-400 hover:text-cyan-400 text-xs"
               >
                 <ExternalLink size={12} />
                 Live&nbsp;Site
@@ -419,7 +417,7 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
                         ? 'bg-emerald-500 text-black'
                         : item.ribbon === 'HOT'
                             ? 'bg-amber-500 text-black'
-                            : 'bg-fuchsia-500 text-white'
+                            : 'bg-blue-500 text-white'
                 }
           `}
             >
@@ -446,7 +444,7 @@ function EduCard({ item, index }: { item: EduItem; index: number }) {
 
         <div className="space-y-0.5">
           <time className="block text-[11px] text-white/50">{item.period}</time>
-          <h3 className="text-sm font-semibold text-white group-hover:text-fuchsia-400">
+          <h3 className="text-sm font-semibold text-white group-hover:text-blue-400">
             {item.heading}
           </h3>
           <p className="text-[13px] text-white/70">{item.subHeading}</p>
@@ -467,7 +465,7 @@ function EduCard({ item, index }: { item: EduItem; index: number }) {
                   href={item.docUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-1 inline-flex items-center gap-1 text-fuchsia-400 hover:text-sky-400 text-xs"
+                  className="mt-1 inline-flex items-center gap-1 text-blue-400 hover:text-cyan-400 text-xs"
               >
                 <Download size={12} />
                 PDF
@@ -476,7 +474,7 @@ function EduCard({ item, index }: { item: EduItem; index: number }) {
         </div>
 
         {item.ribbon && (
-            <span className="absolute -top-1 -right-1 rounded bg-fuchsia-500 px-1.5 py-[1px] text-[9px] font-bold text-white">
+            <span className="absolute -top-1 -right-1 rounded bg-blue-500 px-1.5 py-[1px] text-[9px] font-bold text-white">
           {item.ribbon}
         </span>
         )}

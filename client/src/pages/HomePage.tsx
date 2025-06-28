@@ -4,25 +4,35 @@ import WorkEducationEnhanced from "@/components/WorkEducationEnhanced";
 import Skills                from "@/components/Skills";
 import ProjectsEnhanced      from "@/components/ProjectsEnhanced";
 import Footer                from "@/components/Footer";
+import StickyNav             from "@/components/StickyNav";
 
 export default function HomePage() {
     return (
         <>
-            <HeroEnhanced />
+            <StickyNav />
+            
+            {/* Hero section with id for navigation */}
+            <section id="hero">
+                <HeroEnhanced />
+            </section>
 
-            {/* ------------- EXPERIENCE / EDUCATION ------------- */}
+            {/* Experience section - already has id="experience" */}
             <WorkEducationEnhanced />
 
-            {/* ------------- SKILLS TAG-CLOUD -------------------- */}
-            <Skills />
+            {/* Skills section with id for navigation */}
+            <section id="skills">
+                <Skills />
+            </section>
 
-            {/* ------------- INLINE PROJECT GRID ---------------- */}
-            {/* If you prefer the grid to live on its own page,
-         just delete this line – the /projects route
-         created in step 2 stays intact.                    */}
-            <ProjectsEnhanced />
+            {/* Projects section with id for navigation */}
+            <section id="projects">
+                <ProjectsEnhanced />
+            </section>
 
-            <Footer />
+            {/* Contact/Footer section with id for navigation */}
+            <section id="contact">
+                <Footer />
+            </section>
         </>
     );
 }

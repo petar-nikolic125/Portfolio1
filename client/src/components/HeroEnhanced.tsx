@@ -30,7 +30,7 @@ export default function HeroEnhanced() {
   }, []);
 
   return (
-      <section className="relative flex min-h-screen items-center justify-center bg-background">
+      <section className="relative flex items-center justify-center bg-background" style={{ height: 'calc(100vh - 60px)' }}>
         <div className="w-full max-w-7xl px-6 lg:px-12 text-center">
           {/* ——— NAME with sword-shine ——— */}
           <h1
