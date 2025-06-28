@@ -97,6 +97,16 @@ This is an elite software engineer portfolio application designed to showcase Pe
 
 ## Recent Changes
 
+### June 28, 2025 - Design System Unification & Glow Fix
+- **Complete Design System Unification**: All 5 components (Hero, Work/Education, Skills, Projects, Footer) now use canonical design tokens
+- **Unified Color Palette**: Converted all hard-coded colors to HSL CSS variables (--bg, --accent-from, --border-color, --brand-sky, --brand-fuchsia)
+- **Consistent Layout Structure**: Applied max-w-7xl containers and section-pad spacing across all components
+- **Chip System Implementation**: Standardized chip color palette (chip-blue, chip-lime, chip-amber, chip-fuchsia, chip-cyan) across Skills and Projects
+- **Typography Hierarchy**: Unified fg-base, fg-subtle, fg-faint text classes for consistent contrast levels
+- **Utility Class Adoption**: Implemented canonical toggle-wrap, social-link, timeline-card, and ribbon utility classes
+- **Glow Effect Fix**: Restructured HeroEnhanced.tsx layout to prevent background glow clipping at viewport edges
+- **Cinematic Flow**: Achieved seamless visual transition from Hero → Work/Education → Skills → Projects → Footer
+
 ### June 27, 2025 - CV-Like Structure Migration
 - **Removed Featured Work Section**: Eliminated the standalone Featured Work component to create cleaner CV flow
 - **Restructured Page Layout**: New section order: Hero → Work/Education → Projects → Skills & Contact

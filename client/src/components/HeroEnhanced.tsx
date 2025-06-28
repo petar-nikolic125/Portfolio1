@@ -22,16 +22,17 @@ export default function HeroEnhanced() {
   }, []);
 
   return (
-      <section className="relative flex items-center justify-center min-h-screen overflow-hidden bg-[hsl(var(--bg))] px-6 lg:px-12 max-w-7xl mx-auto">
+      <section className="relative flex items-center justify-center min-h-screen bg-[hsl(var(--bg))]">
         {/* background blobs ―–––––––––––––––––––––––––––––––––––––– */}
-        <div className="pointer-events-none absolute inset-0">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute left-1/2 top-0 w-[36rem] h-[36rem] -translate-x-1/2 bg-[hsl(var(--brand-sky)/.10)] blur-[160px]" />
           <div className="absolute right-0 bottom-0 w-[28rem] h-[28rem] bg-[hsl(var(--brand-fuchsia)/.10)] blur-[140px]" />
         </div>
 
         {/* content ―–––––––––––––––––––––––––––––––––––––––––––––– */}
-        <div className="relative z-10 w-full max-w-5xl text-center animate-slide-in">
-          {/* name */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="max-w-5xl mx-auto text-center animate-slide-in">
+            {/* name */}
           <h1 className="font-serif font-extrabold fg-base leading-none tracking-tight
                        text-[clamp(3.25rem,9vw,6rem)]">
             {personalInfo.name}
@@ -85,6 +86,7 @@ export default function HeroEnhanced() {
             <kbd className="bg-[hsl(var(--bg-surface))] border border-[hsl(var(--border-color))] px-1.5 py-0.5 rounded">R</kbd>&nbsp;for résumé ·&nbsp;
             <kbd className="bg-[hsl(var(--bg-surface))] border border-[hsl(var(--border-color))] px-1.5 py-0.5 rounded">G</kbd>&nbsp;for GitHub
           </p>
+          </div>
         </div>
       </section>
   );
