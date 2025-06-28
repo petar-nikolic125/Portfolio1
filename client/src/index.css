@@ -774,6 +774,13 @@
     animation: fade-slide-in var(--duration-normal) var(--spring) both;
   }
 
+  .skills-column-padding {        /* vertical breathing room */
+    @apply pt-6 md:pt-8 lg:pt-10;
+  }
+  .skills-icon-gap {              /* gap between each icon/caption */
+    @apply gap-x-8 gap-y-10;
+  }
+
   .animate-slide-up-fade {
     animation: slide-up-fade var(--duration-slow) var(--smooth) both;
   }

@@ -1,71 +1,233 @@
-import { skillsByCategory } from "@/data/portfolio";
-import { Badge } from "@/components/ui/badge";
-import { useEffect, useRef, useState } from "react";
+/* ────────────────────────────────────────────────────────────
+   Skills.tsx · “ultimate” polished showcase board
+   Pure React + Tailwind
+   Icons: @icons-pack/react-simple-icons + emoji fall-backs
+   Last updated 2025-06-28
+──────────────────────────────────────────────────────────── */
+
+import { FC, useEffect, useRef, useState } from "react";
+import type { SVGProps } from "react";
+import type { IconType } from "@icons-pack/react-simple-icons";
+
+/* —— Simple-Icons imports —— */
+import {
+  /* Web */
+  SiHtml5,
+  SiCss,
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiVuedotjs,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiWebflow,
+  /* Databases */
+  SiMysql,
+  SiPostgresql,
+  SiMongodb,
+  SiRedis,
+  SiSqlite,
+  SiSupabase,
+  /* AI & ML */
+  SiTensorflow,
+  SiPytorch,
+  SiOpenai,
+  SiHuggingface,
+  /* Commerce / CMS */
+  SiShopify,
+  SiWordpress,
+  SiStripe,
+  SiWoocommerce,
+  /* Languages / Kernel */
+  SiPython,
+  SiC,
+  SiCplusplus,
+  SiLinux,
+  SiKubernetes,
+  SiRust,
+  /* Tools */
+  SiGit,
+  SiGithub,
+  SiDocker,
+  SiPostman,
+  SiJira,
+  SiFigma,
+  SiEslint,
+  SiPrettier,
+  SiNpm,
+} from "@icons-pack/react-simple-icons";
+
+/* —— emoji fall-backs —— */
+type EmojiIcon = FC<SVGProps<SVGSVGElement> & { size?: number }>;
+
+const JavaIcon: EmojiIcon = ({ size = 32, className }) => (
+    <span style={{ fontSize: size }} className={className}>☕</span>
+);
+const VSCodeIcon: EmojiIcon = ({ size = 32, className }) => (
+    <span style={{ fontSize: size }} className={className}>🛠️</span>
+);
+const JetBrainsIcon: EmojiIcon = ({ size = 32, className }) => (
+    <span style={{ fontSize: size }} className={className}>⚙️</span>
+);
+
+/* —— icon union type —— */
+type SkillIcon = IconType | EmojiIcon;
+
+/* —— data model —— */
+interface Skill  { label: string; Icon: SkillIcon }
+interface Column { title: string; items: Skill[]  }
+
+/* —— 2-row board data (Web = 4×2) —— */
+const columns: Column[] = [
+  {
+    title: "Web",
+    items: [
+      { label: "HTML5",        Icon: SiHtml5 },
+      { label: "CSS3",         Icon: SiCss },
+      { label: "JavaScript",   Icon: SiJavascript },
+      { label: "TypeScript",   Icon: SiTypescript },
+      { label: "React",        Icon: SiReact },
+      { label: "Vue.js",       Icon: SiVuedotjs },
+      { label: "Next.js",      Icon: SiNextdotjs },
+      { label: "Tailwind CSS", Icon: SiTailwindcss },
+    ],
+  },
+  {
+    title: "Database",
+    items: [
+      { label: "MySQL",      Icon: SiMysql },
+      { label: "PostgreSQL", Icon: SiPostgresql },
+      { label: "MongoDB",    Icon: SiMongodb },
+      { label: "Redis",      Icon: SiRedis },
+      { label: "SQLite",     Icon: SiSqlite },
+      { label: "Supabase",   Icon: SiSupabase },
+    ],
+  },
+  {
+    title: "AI & ML",
+    items: [
+      { label: "TensorFlow",   Icon: SiTensorflow },
+      { label: "PyTorch",      Icon: SiPytorch },
+      { label: "OpenAI",       Icon: SiOpenai },
+      { label: "Hugging Face", Icon: SiHuggingface },
+    ],
+  },
+  {
+    title: "Commerce",
+    items: [
+      { label: "Shopify",     Icon: SiShopify },
+      { label: "WordPress",   Icon: SiWordpress },
+      { label: "Stripe",      Icon: SiStripe },
+      { label: "WooCommerce", Icon: SiWoocommerce },
+    ],
+  },
+  {
+    title: "Languages",
+    items: [
+      { label: "TypeScript", Icon: SiTypescript },
+      { label: "Python",     Icon: SiPython },
+      { label: "Java",       Icon: JavaIcon },
+      { label: "Rust",       Icon: SiRust },
+    ],
+  },
+  {
+    title: "C & Kernel",
+    items: [
+      { label: "C",          Icon: SiC },
+      { label: "C++",        Icon: SiCplusplus },
+      { label: "Linux",      Icon: SiLinux },
+      { label: "Kubernetes", Icon: SiKubernetes },
+    ],
+  },
+  {
+    title: "Tools",
+    items: [
+      { label: "VS Code",  Icon: VSCodeIcon },
+      { label: "Git",      Icon: SiGit },
+      { label: "GitHub",   Icon: SiGithub },
+      { label: "Docker",   Icon: SiDocker },
+      { label: "Postman",  Icon: SiPostman },
+      { label: "Jira",     Icon: SiJira },
+      { label: "Figma",    Icon: SiFigma },
+      { label: "ESLint",   Icon: SiEslint },
+      { label: "Prettier", Icon: SiPrettier },
+      { label: "NPM",      Icon: SiNpm },
+    ],
+  },
+  {
+    title: "Other",
+    items: [
+      { label: "Webflow",    Icon: SiWebflow },
+      { label: "JetBrains",  Icon: JetBrainsIcon },
+    ],
+  },
+];
+
+/* ══════════════════════════════════════════════════════════ */
 
 export default function Skills() {
+  const sectionRef = useRef<HTMLElement|null>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
+    const io = new IntersectionObserver(
+        ([e]) => e.isIntersecting && setIsVisible(true),
+        { threshold: 0.25 }
     );
-    
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-    
-    return () => observer.disconnect();
-  }, [isVisible]);
+    if (sectionRef.current) io.observe(sectionRef.current);
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <section ref={sectionRef} className="section-pad px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="w-full">
-        <h2 className="font-serif font-bold text-4xl fg-base text-center mb-16 fade-in-up">
-          <span className="shimmer-text">Skills</span>
+      <section
+          ref={sectionRef}
+          className="section-pad py-20 lg:py-24 px-6 md:px-10 lg:px-16
+                 max-w-screen-xl mx-auto"
+      >
+        <h2 className="text-center text-4xl md:text-5xl font-serif font-bold
+                     mb-12 md:mb-16">
+          Skills
         </h2>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {Object.entries(skillsByCategory).map(([category, skills], categoryIdx) => (
-            <div key={category} className={`text-center fade-in-up delay-${categoryIdx * 75}`}>
-              <h3 className="font-sans font-semibold text-lg fg-base mb-4 tracking-wide group-hover:text-[hsl(var(--accent-from))] transition-colors duration-300">
-                {category}
-              </h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                {skills.map((skill, skillIdx) => {
-                  const totalIdx = categoryIdx * skills.length + skillIdx;
-                  const angle = (totalIdx / Object.values(skillsByCategory).flat().length) * 360;
-                  const delay = totalIdx * 20;
-                  
-                  // Rotate through chip colors
-                  const chipColors = ['chip-blue', 'chip-lime', 'chip-amber', 'chip-fuchsia', 'chip-cyan'];
-                  const colorClass = chipColors[totalIdx % chipColors.length];
-                  
-                  return (
-                    <span
-                      key={skill}
-                      className={`chip ${colorClass} hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[hsl(var(--black-900)/.55)] transition-all cursor-default ${
-                        isVisible ? 'animate-radial-burst' : 'opacity-0'
-                      }`}
-                      style={{
-                        animationDelay: `${delay}ms`,
-                        '--burst-angle': `${angle}deg`,
-                      } as React.CSSProperties}
-                    >
-                      {skill}
-                    </span>
-                  );
-                })}
+
+        {/* two balanced rows of 4 columns */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-16">
+          {columns.map((col, cIdx) => (
+              <div
+                  key={col.title}
+                  className={`flex flex-col items-center ${
+                      isVisible ? "animate-fade-up" : "opacity-0"
+                  }`}
+                  style={{ animationDelay: `${cIdx * 80}ms` }}
+              >
+                <h3 className="mb-7 text-lg md:text-xl font-semibold">
+                  {col.title}
+                </h3>
+
+                <ul
+                    className={
+                      col.title === "Web"
+                          ? "grid grid-cols-4 grid-rows-2 gap-x-6 gap-y-8"
+                          : "grid grid-rows-2 grid-flow-col gap-x-6 gap-y-8"
+                    }
+                >
+                  {col.items.map(({ label, Icon }, iIdx) => (
+                      <li
+                          key={label}
+                          className="flex flex-col items-center text-neutral-300
+                             transition-transform hover:-translate-y-1
+                             hover:scale-110"
+                          style={{ animationDelay: `${iIdx * 30}ms` }}
+                      >
+                        <Icon size={32} className="mb-2" />
+                        <span className="text-xs md:text-sm text-center tracking-wide">
+                    {label}
+                  </span>
+                      </li>
+                  ))}
+                </ul>
               </div>
-            </div>
           ))}
         </div>
-      </div>
-    </section>
+      </section>
   );
 }
