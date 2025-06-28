@@ -335,28 +335,28 @@
   .fg-faint  { color: hsl(var(--fg-faint)); }
 
   /* Chip colour variants with premium hover */
-  .chip-blue    { 
-    --chip-bg: var(--chip-blue-bg);    
+  .chip-blue    {
+    --chip-bg: var(--chip-blue-bg);
     --chip-fg: var(--chip-blue-fg);
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   }
-  .chip-lime    { 
-    --chip-bg: var(--chip-lime-bg);    
+  .chip-lime    {
+    --chip-bg: var(--chip-lime-bg);
     --chip-fg: var(--chip-lime-fg);
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   }
-  .chip-amber   { 
-    --chip-bg: var(--chip-amber-bg);   
+  .chip-amber   {
+    --chip-bg: var(--chip-amber-bg);
     --chip-fg: var(--chip-amber-fg);
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   }
-  .chip-fuchsia { 
-    --chip-bg: var(--chip-fuchsia-bg); 
+  .chip-fuchsia {
+    --chip-bg: var(--chip-fuchsia-bg);
     --chip-fg: var(--chip-fuchsia-fg);
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   }
-  .chip-cyan    { 
-    --chip-bg: var(--chip-cyan-bg);    
+  .chip-cyan    {
+    --chip-bg: var(--chip-cyan-bg);
     --chip-fg: var(--chip-cyan-fg);
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   }
@@ -366,7 +366,7 @@
   .fade-in-right    { animation: fade-right 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
   .scale-pop        { animation: scale-pop 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards; }
   .slide-stagger    { animation: slide-in-stagger 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
-  
+
   /* Stagger delays */
   .delay-75         { animation-delay: 75ms; }
   .delay-150        { animation-delay: 150ms; }
@@ -385,15 +385,15 @@
   }
 
   /* Badge ribbons with animation */
-  .ribbon-live  { 
+  .ribbon-live  {
     @apply bg-emerald-500 text-white text-[10px] px-2 py-[2px] rounded font-bold;
     animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
-  .ribbon-hot   { 
+  .ribbon-hot   {
     @apply bg-amber-500 text-white text-[10px] px-2 py-[2px] rounded font-bold;
     animation: wiggle 2s ease-in-out infinite;
   }
-  .ribbon-new   { 
+  .ribbon-new   {
     @apply bg-fuchsia-500 text-white text-[10px] px-2 py-[2px] rounded font-bold;
     animation: scale-pop 3s cubic-bezier(0.68, -0.6, 0.32, 1.6) infinite;
   }
